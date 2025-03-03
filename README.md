@@ -12,6 +12,7 @@ Software Quality project in the 6th semester.
 
 ## Chosen Open-Source Project
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/The_GIMP_icon_-_gnome.svg/2048px-The_GIMP_icon_-_gnome.svg.png" width="100px" height="100px">
+
 #### GIMP on GitHub:
 https://github.com/GNOME/gimp
 #### GIMP on GitLab:
