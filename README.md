@@ -1,4 +1,5 @@
 <img src="https://www.bugzilla.org/assets/img/banner.png" width="100%" height="auto">
+
 # Bugzilla-Testopia
 
 Software Quality project in the 6th semester.
