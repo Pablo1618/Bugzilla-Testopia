@@ -1,0 +1,13 @@
+/Makefile
+/Makefile.in
+/.deps
+/.libs
+/kernelgen
+/gimptool-2.0
+/gimptool-2.0.exe
+/gimp-test-clipboard-2.0
+/gimp-test-clipboard-2.0.exe
+/svg-contrast
+/svg-contrast.exe
+/compute-svg-viewbox
+/compute-svg-viewbox.exe

@@ -1,0 +1,303 @@
+make  all-recursive
+make[1]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38'
+Making all in m4macros
+make[2]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/m4macros'
+make[2]: Nothing to be done for 'all'.
+make[2]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/m4macros'
+Making all in cursors
+make[2]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/cursors'
+make[2]: Nothing to be done for 'all'.
+make[2]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/cursors'
+Making all in themes
+make[2]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/themes'
+Making all in Dark
+make[3]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/themes/Dark'
+make[3]: Nothing to be done for 'all'.
+make[3]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/themes/Dark'
+Making all in Light
+make[3]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/themes/Light'
+make[3]: Nothing to be done for 'all'.
+make[3]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/themes/Light'
+Making all in Gray
+make[3]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/themes/Gray'
+make[3]: Nothing to be done for 'all'.
+make[3]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/themes/Gray'
+Making all in System
+make[3]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/themes/System'
+make[3]: Nothing to be done for 'all'.
+make[3]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/themes/System'
+make[3]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/themes'
+make[3]: Nothing to be done for 'all-am'.
+make[3]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/themes'
+make[2]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/themes'
+Making all in po
+make[2]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/po'
+make[2]: Nothing to be done for 'all'.
+make[2]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/po'
+Making all in po-libgimp
+make[2]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/po-libgimp'
+make[2]: Nothing to be done for 'all'.
+make[2]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/po-libgimp'
+Making all in po-plug-ins
+make[2]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/po-plug-ins'
+make[2]: Nothing to be done for 'all'.
+make[2]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/po-plug-ins'
+Making all in po-python
+make[2]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/po-python'
+make[2]: Nothing to be done for 'all'.
+make[2]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/po-python'
+Making all in po-script-fu
+make[2]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/po-script-fu'
+make[2]: Nothing to be done for 'all'.
+make[2]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/po-script-fu'
+Making all in po-tips
+make[2]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/po-tips'
+make[2]: Nothing to be done for 'all'.
+make[2]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/po-tips'
+Making all in po-windows-installer
+make[2]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/po-windows-installer'
+make[2]: Nothing to be done for 'all'.
+make[2]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/po-windows-installer'
+Making all in data
+make[2]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data'
+Making all in brushes
+make[3]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/brushes'
+Making all in Basic
+make[4]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/brushes/Basic'
+make[4]: Nothing to be done for 'all'.
+make[4]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/brushes/Basic'
+Making all in Fun
+make[4]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/brushes/Fun'
+make[4]: Nothing to be done for 'all'.
+make[4]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/brushes/Fun'
+Making all in gimp-obsolete-files
+make[4]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/brushes/gimp-obsolete-files'
+make[4]: Nothing to be done for 'all'.
+make[4]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/brushes/gimp-obsolete-files'
+Making all in Media
+make[4]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/brushes/Media'
+make[4]: Nothing to be done for 'all'.
+make[4]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/brushes/Media'
+Making all in Legacy
+make[4]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/brushes/Legacy'
+make[4]: Nothing to be done for 'all'.
+make[4]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/brushes/Legacy'
+Making all in Sketch
+make[4]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/brushes/Sketch'
+make[4]: Nothing to be done for 'all'.
+make[4]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/brushes/Sketch'
+Making all in Splatters
+make[4]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/brushes/Splatters'
+make[4]: Nothing to be done for 'all'.
+make[4]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/brushes/Splatters'
+Making all in Texture
+make[4]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/brushes/Texture'
+make[4]: Nothing to be done for 'all'.
+make[4]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/brushes/Texture'
+make[4]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/brushes'
+make[4]: Nothing to be done for 'all-am'.
+make[4]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/brushes'
+make[3]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/brushes'
+Making all in dynamics
+make[3]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/dynamics'
+Making all in Basic
+make[4]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/dynamics/Basic'
+make[4]: Nothing to be done for 'all'.
+make[4]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/dynamics/Basic'
+Making all in FX
+make[4]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/dynamics/FX'
+make[4]: Nothing to be done for 'all'.
+make[4]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/dynamics/FX'
+make[4]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/dynamics'
+make[4]: Nothing to be done for 'all-am'.
+make[4]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/dynamics'
+make[3]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/dynamics'
+Making all in environ
+make[3]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/environ'
+make[3]: Nothing to be done for 'all'.
+make[3]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/environ'
+Making all in gradients
+make[3]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/gradients'
+make[3]: Nothing to be done for 'all'.
+make[3]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/gradients'
+Making all in images
+make[3]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/images'
+make[3]: Nothing to be done for 'all'.
+make[3]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/images'
+Making all in interpreters
+make[3]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/interpreters'
+make[3]: Nothing to be done for 'all'.
+make[3]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/interpreters'
+Making all in palettes
+make[3]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/palettes'
+make[3]: Nothing to be done for 'all'.
+make[3]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/palettes'
+Making all in patterns
+make[3]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/patterns'
+Making all in Animal
+make[4]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/patterns/Animal'
+make[4]: Nothing to be done for 'all'.
+make[4]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/patterns/Animal'
+Making all in Fabric
+make[4]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/patterns/Fabric'
+make[4]: Nothing to be done for 'all'.
+make[4]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/patterns/Fabric'
+Making all in Food
+make[4]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/patterns/Food'
+make[4]: Nothing to be done for 'all'.
+make[4]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/patterns/Food'
+Making all in Legacy
+make[4]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/patterns/Legacy'
+make[4]: Nothing to be done for 'all'.
+make[4]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/patterns/Legacy'
+Making all in Paper
+make[4]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/patterns/Paper'
+make[4]: Nothing to be done for 'all'.
+make[4]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/patterns/Paper'
+Making all in Plant
+make[4]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/patterns/Plant'
+make[4]: Nothing to be done for 'all'.
+make[4]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/patterns/Plant'
+Making all in Sky
+make[4]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/patterns/Sky'
+make[4]: Nothing to be done for 'all'.
+make[4]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/patterns/Sky'
+Making all in Stone
+make[4]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/patterns/Stone'
+make[4]: Nothing to be done for 'all'.
+make[4]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/patterns/Stone'
+Making all in Water
+make[4]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/patterns/Water'
+make[4]: Nothing to be done for 'all'.
+make[4]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/patterns/Water'
+Making all in Wood
+make[4]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/patterns/Wood'
+make[4]: Nothing to be done for 'all'.
+make[4]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/patterns/Wood'
+make[4]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/patterns'
+make[4]: Nothing to be done for 'all-am'.
+make[4]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/patterns'
+make[3]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/patterns'
+Making all in tips
+make[3]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/tips'
+make[3]: Nothing to be done for 'all'.
+make[3]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/tips'
+Making all in tags
+make[3]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/tags'
+make[3]: Nothing to be done for 'all'.
+make[3]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/tags'
+Making all in tool-presets
+make[3]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/tool-presets'
+Making all in Crop
+make[4]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/tool-presets/Crop'
+make[4]: Nothing to be done for 'all'.
+make[4]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/tool-presets/Crop'
+Making all in FX
+make[4]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/tool-presets/FX'
+make[4]: Nothing to be done for 'all'.
+make[4]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/tool-presets/FX'
+Making all in Paint
+make[4]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/tool-presets/Paint'
+make[4]: Nothing to be done for 'all'.
+make[4]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/tool-presets/Paint'
+Making all in Selection
+make[4]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/tool-presets/Selection'
+make[4]: Nothing to be done for 'all'.
+make[4]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/tool-presets/Selection'
+Making all in Sketch
+make[4]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/tool-presets/Sketch'
+make[4]: Nothing to be done for 'all'.
+make[4]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/tool-presets/Sketch'
+make[4]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/tool-presets'
+make[4]: Nothing to be done for 'all-am'.
+make[4]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/tool-presets'
+make[3]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data/tool-presets'
+make[3]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data'
+make[3]: Nothing to be done for 'all-am'.
+make[3]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data'
+make[2]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/data'
+Making all in desktop
+make[2]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/desktop'
+make[2]: Nothing to be done for 'all'.
+make[2]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/desktop'
+Making all in menus
+make[2]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/menus'
+make[2]: Nothing to be done for 'all'.
+make[2]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/menus'
+Making all in libgimpbase
+make[2]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/libgimpbase'
+make[2]: Nothing to be done for 'all'.
+make[2]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/libgimpbase'
+Making all in tools
+make[2]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/tools'
+make[2]: Nothing to be done for 'all'.
+make[2]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/tools'
+Making all in pdb
+Making all in icons
+make[2]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/icons'
+Making all in hicolor
+make[3]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/icons/hicolor'
+make[3]: Nothing to be done for 'all'.
+make[3]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/icons/hicolor'
+Making all in Color
+make[3]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/icons/Color'
+make[3]: Nothing to be done for 'all'.
+make[3]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/icons/Color'
+Making all in Legacy
+make[3]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/icons/Legacy'
+make[3]: Nothing to be done for 'all'.
+make[3]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/icons/Legacy'
+Making all in Symbolic
+make[3]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/icons/Symbolic'
+make[3]: Nothing to be done for 'all'.
+make[3]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/icons/Symbolic'
+Making all in Symbolic-High-Contrast
+make[3]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/icons/Symbolic-High-Contrast'
+make[3]: Nothing to be done for 'all'.
+make[3]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/icons/Symbolic-High-Contrast'
+Making all in Symbolic-Inverted
+make[3]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/icons/Symbolic-Inverted'
+make[3]: Nothing to be done for 'all'.
+make[3]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/icons/Symbolic-Inverted'
+Making all in Symbolic-Inverted-High-Contrast
+make[3]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/icons/Symbolic-Inverted-High-Contrast'
+make[3]: Nothing to be done for 'all'.
+make[3]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/icons/Symbolic-Inverted-High-Contrast'
+make[3]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/icons'
+make[3]: Nothing to be done for 'all-am'.
+make[3]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/icons'
+make[2]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/icons'
+Making all in libgimpcolor
+make[2]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/libgimpcolor'
+make[2]: Nothing to be done for 'all'.
+make[2]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/libgimpcolor'
+Making all in libgimpmath
+make[2]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/libgimpmath'
+make[2]: Nothing to be done for 'all'.
+make[2]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/libgimpmath'
+Making all in libgimpconfig
+make[2]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/libgimpconfig'
+make[2]: Nothing to be done for 'all'.
+make[2]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/libgimpconfig'
+Making all in libgimpmodule
+make[2]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/libgimpmodule'
+make[2]: Nothing to be done for 'all'.
+make[2]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/libgimpmodule'
+Making all in libgimpthumb
+make[2]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/libgimpthumb'
+make[2]: Nothing to be done for 'all'.
+make[2]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/libgimpthumb'
+Making all in libgimpwidgets
+make[2]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/libgimpwidgets'
+make  all-am
+make[3]: Entering directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/libgimpwidgets'
+  CCLD     libgimpwidgets-2.0.la
+C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/bin/ld.exe: cannot export gimp_color_picker_cursors_get_resource: symbol not defined
+collect2.exe: error: ld returned 1 exit status
+make[3]: *** [Makefile:1195: libgimpwidgets-2.0.la] Error 1
+make[3]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/libgimpwidgets'
+make[2]: *** [Makefile:1124: all] Error 2
+make[2]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38/libgimpwidgets'
+make[1]: *** [Makefile:852: all-recursive] Error 1
+make[1]: Leaving directory '/c/Users/Pablo/Downloads/gimp-GIMP_2_10_38/gimp-GIMP_2_10_38'
+make: *** [Makefile:752: all] Error 2

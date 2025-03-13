@@ -1,0 +1,1990 @@
+                   ------------------------------
+                   GNU Image Manipulation Program
+                         2.10 Stable Branch
+                   ------------------------------
+
+This is the stable branch of GIMP. Unlike earlier stable branches,
+we do allow some new features here, if they are not too invasive.
+Otherwise, this branch is only for bug-fixes.
+
+
+Overview of Changes from GIMP 2.10.36 to GIMP 2.10.38
+=====================================================
+
+This release features some important feature backport for Windows: support of
+Windows Ink API for input devices (i.e. graphics tablets in particular).
+
+Other than this, it is mostly a bug-fix release of core and plug-in code. On any
+OS other than Windows, there are no functional changes, though you will want to
+update for fixes.
+
+Core:
+
+  - Windows Ink support backported from GIMP 3 (this also relies on GTK+3
+    backports so the build for GIMP 2.10.38 requires specially-patched GTK+2, on
+    Windows only).
+  - On Windows, it would now be possible to use devices attached after GIMP has
+    started through a fallback device.
+
+Translations:
+
+  - 15 translations were updated: Belarusian, Brazilian Portuguese, British
+    English, Danish, Georgian, German, Hungarian, Icelandic, Italian, Norwegian
+    Nynorsk, Slovenian, Spanish, Swedish, Turkish, Ukrainian.
+
+Build:
+
+  - Many GTK+2 patches for Windows (see #7498) were backported specially from
+    newer GTK versions and are integrated in our installer.
+
+
+Overview of Changes from GIMP 2.10.34 to GIMP 2.10.36
+=====================================================
+
+Core:
+
+  - Disable Arbitrary Rotation menus (under both Image and Layer menus) if no
+    image is active, for consistency.
+  - New gradient available: FG to Transparent (Hardedge) gradient.
+  - A change in linuxwacom made some graphics tablet crash GIMP. Though the
+    issue is in the driver (downgrading it "fixes" the issue), it was bad enough
+    that a workaround was also added in GIMP code so that we don't crash with
+    the newer driver. A fix was also merged on linuxwacom itself:
+    https://github.com/linuxwacom/xf86-input-wacom/issues/307
+    https://github.com/linuxwacom/xf86-input-wacom/pull/309
+  - New palette import supports:
+    * Adobe Swatch Exchange (ASE)
+    * Adobe Color Book (ACB)
+  - Generated Brush previews are now rotated clockwise with the brush angle,
+    which goes against the documentation. Nevertheless this is how angles were
+    used on canvas in the 2.10 branch until now, so to avoid breaking existing
+    workflows while having consistent preview, we chose to follow actual
+    on-canvas usage over documentation. It may be re-evaluated for GIMP 3.
+
+Tool:
+
+  - Text tool:
+    * When replacing a selection, take and apply markup (if any) from
+      the first character of the selection for the entered text. This fixes the
+      case when you no longer can change the global layer text properties after
+      replacing the text.
+    * Set the blank font name for the standard font instead of 'Standard'
+      to fix the issue when 'Standard' can be actual font from the list or a
+      font which starts with (e.g. Standard Symbols PS).
+
+User Interface:
+
+  - Item tree view lock boxes:
+    * now separately themable with gtkrc;
+    * showing a white frame when hovering over lock buttons;
+    * showing a small padlock next the lock icon when it's active.
+  - Add Table of Contents to User Manual submenu (in Help menu).
+
+Plug-ins:
+
+  - Fixed vulnerabilities:
+    * DDS: ZDI-CAN-22093
+    * PSD: ZDI-CAN-22094
+    * PSP: ZDI-CAN-22096 and ZDI-CAN-22097
+  - JPEG-XL: support libjxl v0.9 decoding API.
+  - Metadata editor: more DigitalSourceType values.
+  - PDF are now loaded at 300PPI by default.
+  - GIF:
+    * Added support of non-square aspect ratio by setting different vertical and
+      horizontal resolution when a loaded file has the PixelAspectRatio metadata
+      set.
+  - Various more file format fixes (at least GIF, PDF import, HEIF/AVIF, JPEG
+    XL, XWD, DDS) and various fixes in non-file format related plug-ins too.
+  - Image Map: HTTPS scheme now accepted in the URL field.
+
+Libgimpbase:
+
+  - Do not save Photoshop specific EXIF metadata when exporting images because
+    they can contain sensitive data and we cannot update them.
+  - We now update Exif.Photo.PixelX/YDimension Exif tags when resizing and
+    exporting (but only if they were already present, as they are
+    non-essential).
+
+Translation:
+
+  - 20 translations were updated: Belarusian, Catalan, Chinese (China), Danish,
+    Dutch, Georgian, German, Greek, Hungarian, Icelandic, Italian, Lithuanian,
+    Polish, Portuguese, Romanian, Slovenian, Spanish, Swedish, Turkish,
+    Ukrainian.
+
+Build:
+
+  - Added code in the Windows installer script for the ARM 64-bit build, bundled
+    into the same universal installer (though the first experimental installer
+    with Aarch64 support was for GIMP 2.10.34 revision 2).
+
+
+Overview of Changes from GIMP 2.10.32 to GIMP 2.10.34
+=====================================================
+
+Core:
+
+  - Check for updates now works on macOS (backported from 2.99.14).
+  - Update help IDs for better integration with the documentation website.
+  - Symmetry dockable contents is now shown, yet deactivated, when no images are
+    opened, improving discoverability (backported from 2.99.14).
+  - DBus fully disabled on macOS (in some case, it could even freeze GIMP
+    process when dbus is present yet not responding). Open With feature (e.g.
+    from file browsers) still work fine as it uses a different code path on
+    macOS. Other features using dbus (opening files or running batch commands
+    from a separate GIMP process) won't work, but they probably never did on
+    macOS anyway.
+  - "Canvas Size" dialog took too much vertical space and now better uses the
+    horizontal space by moving the preview and offset fiels to the right side,
+    and the "Center" button just below (backported from 2.99.8).
+  - Template selector (backported from 2.99.6) in resize dialog.
+  - Color scale preferences (0..255/0..100 and LCh/HSV settings in Colors
+    selection dialogs) are now remembered across sessions.
+  - Eye icon header added to the item tree views to make it more obvious where
+    to click for item visibility and links (backported from 2.99.10)
+  - Revert color proofing behavior changed in 2.10.32 which resulted in
+    inconsistent past workflows.
+  - "Lock path strokes" tooltip for the dockable icon was renamed "Lock path".
+
+Plug-ins:
+
+  - DDS: make GUI translatable.
+  - file-raw: added high bit depth precision export (partial backport from
+    2.99.12).
+  - TIFF:
+    * Various bug fixes;
+    * better check for invalid resolutions on import;
+    * do not generated warnings for incorrect RichTIFFIPTC tags produced by
+      Adobe products (only output a message to stderr, for not completely
+      ignoring these);
+    * Loading "reduced" image or not is now an option. We use a heuristic for
+      the default value of said option (trying to guess if it's a thumbnail by
+      using common usage), but final decision is now up to one knowing the image
+      you load (backported from 2.99.14);
+    * Default TIFF export format is "normal" TIFF, not BigTIFF (making it
+      default was definitely an error in 2.10.32).
+  - PSD:
+    * Various bug fixes;
+    * Useless physical unit conversion removed;
+    * Backported improvement (2.99.10) for importing layers with clipping set
+      (leading to color bleeding);
+    * Backported improvements (2.99.10) for importing clipping layers;
+    * Paths are now exported (backported from 2.99.14).
+  - WebP: more informative error messages in some cases.
+  - Flame: various bug fixes.
+  - JPEG-XL:
+    * metadata import backported from 2.99.14 - (requires libjxl 0.7.0)
+    * Partial backport (2.99.8) of JPEG-XL export; export is always in 8bit
+      lossless.
+  - HEIF: various bug fixes.
+  - Dicom: various bug fixes.
+  - help:
+    * macOS: https support now working fine for help files (bypassing
+      lack of support in GIO for macOS platform).
+  - animation-play: fixed on macOS.
+  - PDF:
+    * Import: new option "Fill transparent areas with white" to fill the
+      background in white (ON by default as most office PDF writers seem to rely
+      on readers filling the background with white), allowing importing
+      transparent PDF files.
+    * Export: new option "Fill transparent areas with background color" allowing
+      to decide whether to export a PDF with transparent background.
+  - TGA:
+    * Added a workaround to load wrongful TGA files exported by Krita (which
+      they fixed on their side too now, see Krita bug 464484).
+  - ICO and CUR:
+    * Magics detection for these formats has been removed (now using only using
+      filename extension) because it was interfering with the detection of
+      certain types of TGA images (which are likely more common than ICO and CUR
+      files, and extension for these should be reliable enough).
+
+Libgimpbase:
+
+  - GimpMetadata API (in particular the gimp_metadata_set_from_*() functions)
+    are now much less memory-hungry (backported from the main dev branch) when
+    using GExiv 0.12.2 or over. With some huge metadata, it could cause long
+    freeze or even crashes of plug-ins.
+
+Libgimpwidgets:
+
+  - Color-picking with X11 is now the default when compiled with X11, even if a
+    color-picking portal also exists, because it is always right, whereas
+    portals return color in display space without the space information itself
+    (i.e. without profiles).
+  - New dedicated GimpPickButton implementation for Windows (backported from
+    2.99.14).
+
+Libgimp:
+
+  - New wrapper functions around GEGL ops, which also map to items in our Color
+    menu:
+    * gimp_drawable_shadows_highlights()
+    * gimp_drawable_extract_component()
+
+Build:
+
+  - Bumping minimum GEGL to version 0.4.38.
+  - Bumping minimum libjxl to version 0.7.0.
+  - New GIMP_RELEASE macro to tell if code is a release or in-between release
+    (different from GIMP_UNSTABLE which was telling if we are in a stable or
+    development branch).
+  - Our stable CI now uses Debian stable where Python2 is still present.
+
+
+Overview of Changes from GIMP 2.10.30 to GIMP 2.10.32
+=====================================================
+
+Core:
+
+  - Adding support for localized glyphs ('locl') in Text tool depending
+    on the value of the "Language" field in Text tool options.
+  - XCF import nows drop Xmp.photoshop.DocumentAncestors tags after 1000
+    of them, similarly to what libgimpbase now does. This could happen
+    in XCF files which were created e.g. from a PSD import before we
+    handled the issue in libgimpbase.
+  - XCF import:
+    * made more robust by ignoring (with a warning) invalid
+      parasites and continuing to load the rest of the file (which might
+      be valid). This way, we are able to salvage more cases of
+      partially corrupted XCF files.
+    * additional safety checks to detect broken XCF files.
+  - Version check can be globally disabled through a value in the
+    `gimp-release` file. This would allow to use the same build on
+    repositories with an update channels (where we don't want update
+    check notifications) and on standalone (where we want them).
+
+User Interface:
+
+  - Removed titlebar/borders from Windows Splash Screen.
+  - All official themes now have on-hover indicator around eye and link
+    toggles in Layer/Channel/Path Dialog tree-views.
+  - Dark theme:
+    * Hover-on effect on radio menu items to improve readability.
+  - Color icon theme:
+    * Thin contrast border for 'close' and 'detach' to improve their
+      readability against dark backgrounds on mouse-hover.
+
+Plug-ins:
+
+  - TGA: improving indexed images with alpha channel support (both
+    import and export).
+  - DICOM: Fix endian conversion for photometric interpretation
+    "MONOCHROME1".
+  - file-raw: "RGB Save Type" confusing dialog label renamed to "Palette
+    Type" as on the main dev branch.
+  - screenshot: option to capture cursor in now available on Windows.
+  - pygimp: new optional parameter `run_mode_param` (defaulting to True)
+    to register() function of the Python binding, which allows to make
+    the "run-mode" parameter optional when creating a new PDB procedure.
+    This is already used to fix "file-openraster-load-thumb" without
+    changing its signature.
+  - BMP: new PDB procedure "file-bmp-save2" which supports all options
+    available interactively.
+  - BigTIFF: our TIFF plug-in now officially supports BigTIFF import and
+    export.
+    * Import was actually already working transparently if you had
+      a recent enough libtiff. Now the recent libtiff is enforced by
+      dependency requirements.
+    * Export support was added with a checkbox in the interactive dialog
+      and a new "bigtiff" argument in the "file-tiff-save" PDB
+      procedure.
+    * When an interactive export of ClassicTIFF fails for the explicit
+      reason of "Maximum TIFF file size exceeded", the export dialog is
+      raised again with a message proposing to try again as BigTIFF or
+      trying another compression algorithm.
+      This allows because discoverability and understandibility of the
+      issue, while not forcing BigTIFF export (since it might not be
+      supported everywhere).
+    * Unlike the same change on the main dev branch, this backport comes
+      without a dependency requirement bump, which means this will only
+      work if GIMP is built with recent enough libtiff.
+  - Raw: more robust load able to load as much as possible from the
+    file, then fill the rest with white, when offset and dimensions are
+    bigger than actual file size.
+  - Improved support of a few plug-in code for building under UCRT
+    Windows environment (more modern C runtime library than MINGW).
+  - EPS: loading transparent EPS files now supported.
+  - JPEG XL: import backported from the `master` (2.99) branch.
+  - WebP: export has a new IPTC checkbox (saved through XMP) as well as
+    a thumbnail checkbox. (backported from dev branch, since 2.99.8)
+  - DDS: export has a new flip option (useful for some game engine) as
+    well as a new savetype option to export all visible layers (not only
+    the active one).
+  - TIFF:
+    * import support for 8 and 16 bit CMYK(A) TIFF files.
+    * 1, 2 and 4-bit B/W images are now converted to indexed rather than
+      grayscale as it seems that there is more of a use case for these
+      images to be handled as indexed, even though technically they can
+      be considered grayscale.
+      In the future we could add an option at loading time where the
+      user can choose whether they prefer it to be loaded as indexed or
+      grayscale.
+    * Fix loading images generated by MATLAB's blockproc function.
+    * More robust loading for 8 bps grayscale MINISWHITE TIFF.
+
+Libgimp:
+
+  - New gimp_plug_in_error_quark() as a generic GQuark/GError domain for
+    plug-ins (backported from 2.99.6).
+  - gimp_drawable_brightness_contrast() now works in the [-1.0, 1.0]
+    range (it's more of a fix than a change because it's what it should
+    have been from the start).
+  - Better management of modification time in metadata: IPTC tag
+    Iptc.Application2.DateCreated is not overridden anymore as it is the
+    original creation date of the image. Instead we set the XMP tag
+    Xmp.xmp.ModifyDate for file modification time and
+    Xmp.xmp.MetadataDate for metadata modification time.
+  - Format of Xmp.tiff.DateTime is now properly set with timezone as a
+    consequence of the previous improvement.
+
+Libgimpbase:
+
+  - Limit to 1000 ancestors when importing images with incredible amount
+    of `Xmp.photoshop.DocumentAncestors` tags, which is most likely due
+    to a bug in some versions of Photoshop (in some PSDs, we encountered
+    over 100,000 such tags; it probably makes no sense that a document
+    could have that many ancestor documents). GIMP will now stops at
+    1000 such tags before dropping the rest and continue loading the
+    file.
+
+Icons:
+
+  - Chain icons for the Color icon theme reworked from the Symbolic
+    versions (with contrast borders to work on any background color) so
+    that the "broken" and full variants are easily distinguishable.
+
+Translations:
+
+  - New Galician and Georgian translations for the Windows installer.
+  - 20 translations were updated: Catalan, Chinese (China), Croatian,
+    Danish, Dutch, Finnish, French, Georgian, German, Hungarian,
+    Icelandic, Italian, Polish, Portuguese, Russian, Slovenian, Spanish,
+    Swedish, Turkish, Ukrainian.
+
+Build:
+
+  - Bumping minimum GEGL to version 0.4.36.
+  - The Windows installer now has an option /DISABLECHECKUPDATE=true to
+    install the same build but editing the `gimp-release` file to
+    disable update check as newly implemented (see above in Core
+    section).
+
+
+Overview of Changes from GIMP 2.10.28 to GIMP 2.10.30
+=====================================================
+
+Core:
+
+  - Do not follow subpixel font rendering choice from system settings
+    for text layer rendering. These systems are useful for GUI
+    rendering on a screen of a specific type and pixel order. Yet when
+    rendering an image which can be zoomed in or out, showed on various
+    screens or even printed, subpixel font rendering doesn't make sense.
+  - Rewrite the core selection drawing logics so that it works on macOS
+    Big Sur and over. This is a backport (adapted to GTK+2) of the fix
+    brought in GIMP 2.99.8 for Wayland and macOS.
+  - Ignore MakerNote metadata tag at export and only store the tags that
+    go in it, hence avoiding partial invalid metadata.
+  - Color picking from Colors dockable can now use the Freedesktop
+    portal.
+  - On Windows, move from GetICMProfile() to WcsGetDefaultColorProfile()
+    because the former is broken in Windows 11.
+
+Plug-ins:
+
+  - metadata-viewer: improve how XMP tags with multiple values are
+    handled and shown (now each value on a separate line for better
+    readability).
+  - metadata-editor:
+    * XMP array tags of type BAG and SEQ are now on separate lines.
+    * Comparing XMP tags with equivalent IPTC tags with multiple values,
+      each value is compared individually, instead of comparing the list
+      as a whole.
+  - Many robustness improvements and other fixes to the metadata
+    plug-ins.
+  - AVIF: prefer AOM encoder for export (rather than "rav1e", default of
+    libheif, yet with worse performance).
+  - PSD:
+    * Skip sanity check for mask of rendered layers as some layer mask
+      have invalid dimensions in such cases. They will now be loaded
+      correctly.
+    * Fixed loading of CMYK PSD files without alpha.
+    * Fixed loading of CMYK images without layers.
+    * Fixed loading of merged image of a 16 bit per channel RGBA PSD
+      file with the alpha channel opaque.
+   - PBM: large file export now always works and does not depend anymore
+     on the platform's long int size.
+   - Screenshot:
+     * GNOME shell implementation dropped because the D-Bus API has been
+       restricted to core components for security reasons, thus our
+       plug-in was failing.
+     * KDE portal moved as last fallback after the X implementation
+       (when running on X) and Freedesktop portal, because KDE is also
+       starting to block API calls for security reasons.
+
+Installer:
+
+  - Extension .avif now associated to GIMP.
+  - Drop codepage conversion, use UTF-8 for language files.
+
+Build:
+
+  - macOS support officially bumped to macOS 10.12 (Sierra). We would
+    usually try to avoid doing this within a stable release but the
+    conditions (lack of contributors) is such that it is hard to avoid.
+
+
+Overview of Changes from GIMP 2.10.26 to GIMP 2.10.28
+=====================================================
+
+Translations:
+
+  - 10 translations were updated: Catalan, Chinese (China), Finnish,
+    Italian, Polish, Russian, Slovenian, Spanish, Swedish and Ukrainian.
+
+Build:
+
+  - Fix uninstalled white-border prelight file.
+
+
+Overview of Changes from GIMP 2.10.24 to GIMP 2.10.26
+=====================================================
+
+Core:
+
+  - Dashboard now has memory support in OpenBSD.
+  - Default shortcuts Shift+[ and ] for tool size changed to { and }.
+  - Performance improvements for GIMP on macOS Big Sur: these
+    improvements were actually already applied in our macOS packages
+    since GIMP 2.10.22, but were applied upstream directly only now.
+
+User Interface:
+
+  - Dark theme: improve accessibility of GtkRadioButton by adding a
+    white border on mouse-hover.
+  - Gray theme: set light background for selected text in Layers and
+    Paths dockable dialogs to make text visible.
+  - Dark, Gray and Light themes: remove 3D shadow box around eye and
+    link toggles in Layers, Channels, and Paths dockable dialog tree
+    views.
+
+Plug-ins:
+
+  - Improved DDS support and fix some red/blue bit swap for RGB10A2 DDS.
+    The plug-in version is incremented so that it is able to catch and
+    correct previously incorrect RGB10A2 images exported by older
+    versions of our plug-in.
+  - DDS files with "L16" - a 16 bit luminance channel - are now loaded
+    in 16-bit.
+  - DICOM images:
+    * Support for planar configuration.
+    * Support for deprecated big endian transfer.
+  - TIFF images:
+    * Thumbnail storing now done by storing the thumbnail as the second
+      page in the file (through Exiv2) and setting metadata
+      "Exif.Thumbnail.NewSubfileType" to 1 (reduced resolution image)
+      instead of storing the thumbnail as a subifd. This was done
+      because of a Windows bug locking TIFF files with thumbnail stored
+      as subfid.
+    * Symmetrically, loading will ignore pages marked as "reduced
+      resolution image" (i.e. it will consider them as thumbnails), as
+      well as try to guess if a page (without subfile type) is a
+      thumbnail when it meets following criteria: second page with YCbCr
+      PhotometricInterpretation, old style jpeg compression while the
+      first page has a different PhotometricInterpretation or
+      compression.
+
+Script-fu:
+
+  - New (dir-make "/dir/name" mode) function to create a directory.
+
+Translations:
+
+  - New translations for the Windows installer: Vietnamese, Lithuanian.
+  - 13 translations were updated: Catalan, Chinese (China), Croatian,
+    Dutch, German, Lithuanian, Polish, Russian, Slovenian, Spanish,
+    Swedish, Ukrainian and Vietnamese.
+
+Build:
+
+  - On Windows, *.rs file extension is not associated with SUN Raster
+    images anymore. The reason is that this file extension is mostly
+    used for Rust code files nowadays. If Windows could detect file
+    formats with "magic numbers" (i.e. byte identifiers), it would not
+    be a problem, but since it relies apparently only the extension,
+    it's better to remove this association.
+  - Oppositely on Linux and other Unix-like systems using desktop files,
+    add the image/x-sun-raster MimeType which was forgotten (there,
+    detection should be fine and not depend on file extension).
+  - gimp30-tips.mo is not installed anymore (only used during the build
+    to generate gimp-tips.xml with multiple language support).
+  - --enable-check-update now has an "auto" value, which is the new
+    default. It is equivalent to "yes" for Windows and macOS and "no" in
+    all other cases.
+  - New unit test to check that localizations listed in the installer
+    script match available po files in po-windows-installer/.
+  - "msys*" host value now detected as Windows builds.
+  - Bumping minimum GEGL to version 0.4.32.
+
+
+Overview of Changes from GIMP 2.10.22 to GIMP 2.10.24
+=====================================================
+
+Core:
+
+  - Ignore Pentax and PentaxDng metadata at export because they are
+    unsupported.
+  - DBus calls (remote file open, typically with double click on file
+    browser; and remote command run) are now processed after all command
+    line files (in case of calls during startup) and in the call order
+    (FIFO) for consistency. Some timeout has also been added to not spam
+    the core process with non-processable DBus calls during startup.
+  - Display profile name in "Color space" field of Image Properties and
+    improve ellipsis & wrap on dialog fields whose contents' size is not
+    controllable together with better dialog size management.
+  - Fix stack overflow when loading very large XCF files on Windows.
+  - Point snapping now works outside the canvas. This is used for snap
+    to guides, grid and vectors. Snap to grid only works off-canvas when
+    "Show All" is enabled because off-canvas grid is not visible
+    otherwise, though snap to guide and vectors will always work
+    off-canvas.
+
+Libgimp:
+
+  - Various metadata improvements:
+    * Improve reading of iptc tags that appear more than once.
+
+Plug-ins:
+
+  - JPEG export will better advertize when metadata export fails,
+    possibly with relevant error message. Image export would not fail,
+    but at least we make the person aware metadata is not properly
+    exported.
+  - More robust TIFF import and export:
+    * Better handling of Exif.Thumbnail.* tags on export.
+    * Import now ignores TIFF pages with invalid directory (rather than
+      freezing and output an error to warn of possible data loss).
+    * Import attempts to count the directories by reading them when the
+      headers does not announce any directory, which allows to salvage
+      images with improper header. Also if reading of a directory fail,
+      we now output a message to warn of possible data loss.
+    * Fixed loading 2 and 4-bit TIFF images in grayscale and indexed.
+    * Improve support of ExtraSamples fields with non-conformant TIFF
+      files.
+    * Improve loading of multi page tiffs with linear TRC.
+    * More safety checks as a result of fuzz-testing.
+    * Improve loading of MinIsWhite and MinIsBlack images.
+  - GeoTIFF tag support added (recognized and stored into image
+    parasites at import, then exported back when TIFF format is used)
+    with appropriate "Save GeoTIFF data" checkbox (checked by default
+    and sensitive only when the metadata parasite is present) to disable
+    GeoTIFF metadata export when not desired.
+  - The metadata viewer and editor got a big cleaning and refactoring
+    pass, as well as various fixes and several improvements:
+    * Fix handling of IPTC tags which can appear more than once (such as
+      "Keywords") in both the viewer and editor.
+    * Always read both the IPTC and XMP equivalent tags in the editor,
+      instead of assuming they are necessarily the same.
+    * More IPTC equivalents of XMP tags added:
+      + Iptc.Application2.LocationName <=> Xmp.iptc.Location
+      + Iptc.Application2.BylineTitle <=> Xmp.photoshop.AuthorsPosition
+      + Iptc.Application2.CountryCode <=> Xmp.iptc.CountryCode
+      + Iptc.Application2.Writer <=> Xmp.photoshop.CaptionWriter
+    * The editor now properly saves IPTC tags.
+    * Improve UTF-8 conversion to avoid double string conversion (hence
+      actually breaking encoding).
+    * Use proper unit abbreviations and proper label casing.
+    * GPS data is now properly formatted with better precision and with
+      translatable string parts and tooltips are added to explain how to
+      correctly edit GPS data (latitude, longitude, altitude).
+      Also seconds part of latitude/longitude is now saved with more
+      precision and altitude details now switch from .1m to .10m.
+    * Better error reporting when the editor fails to write a tag, with
+      proper GUI error, so that such error do not go unseen.
+    * Better error handling when closing the editor or viewer too, and
+      improve error handling when the calendar dialog fails.
+    * Use a logging domain for debugging-only messages which pollutes
+      the output.
+    * Xmp.iptc.CreatorContactInfo/Iptc4xmpCore:* override the shorter
+      forms Xmp.iptc.Ci* if both are present, since the longer form is
+      more common.
+    * Improve saving of XMP metadata.
+    * And more bug fixes and refactoring steps to get rid of duplicate
+      code.
+  - PNG will now prompt only for layer offset different from zero. Some
+    software were always setting an offset of 0 (e.g.: POV-Ray v3.7) so
+    GIMP would unecessarily prompt the user until now for PNG created by
+    such software.
+  - BMP:
+    * allow loading of BMP images with incorrect BI_BITFIELDS
+      compression.
+    * support loading more bit depth such as 24bpp images.
+  - file-darktable:
+    * support updated Lua API of darktable 3.6 and beyond;
+    * Adding environment contents to debugging output when
+      DARKTABLE_DEBUG env variable is set.
+  - PDF import:
+    * New option to reverse order of layer.
+    * Support fractional DPI (allowing accurate page dimensions).
+  - DDS:
+    * Set blue channel of BC5 dds images to 0 instead of 255.
+    * Fix DDS BC5 compression/decompression with Red and Blue swapped.
+      We detect images created by an older GIMP on loading and swap the
+      channels back.
+  - HEIF:
+    * Removes the "HDR" mention on HEIF 10/12-bit export because high
+      bit depth does not necessarily means HDR.
+    * Runtime detection of HEIC and AVIF file formats (depending on
+      available encoders and decoders), which allows afterwards update
+      of the dependency, but also allows usage for a single format (e.g.
+      for distributions which want to support only AVIF).
+    * With libheif 1.10, visually lossless export is possible for
+      10/12 bit depths too
+  - PSD:
+    * More flexible reading of layer mask record size, skipping invalid
+      or unsupported mask info size, hence allowing us to load more PSD
+      files (at least the part of a PSD we support instead of failing
+      the whole import altogether).
+  - G3 fax images:
+    * Improve error handling when loading.
+    * Be more forgiving on bad lines which were quite frequent on older
+      fax images, allowing to salvage some old images.
+
+Build:
+
+  - Some configure fixes for autoconf-2.70 support.
+  - Adwaita's legacy "software-update-available" icon is now bundled
+    with GIMP to handle the possibility of them being absent from your
+    system theme (typically it was missing on our Windows build).
+
+Installer:
+
+  - New Slovak translation.
+
+Translations:
+
+  - Kabyle translation added.
+
+Build:
+
+  - Bumping minimum GEGL to version 0.4.30.
+
+
+Overview of Changes from GIMP 2.10.20 to GIMP 2.10.22
+=====================================================
+
+Core:
+
+  - Verbose version information (`gimp-2.10 -v` on command line, or
+    debug output) now displays Flatpak related information when
+    available. This is especially useful for debugging (such as the
+    exact Flatpak build hash, the runtime version, the installed
+    Flatpak extensions, permissions, etc.).
+  - OpenCL settings has now been moved to the Playground tab in
+    Preferences.
+  - On stable builds, "Playground" tab is now visible in Preferences if
+    any of the experimental features has been enabled, even without the
+    CLI option `--show-playground`.
+
+Tools:
+
+  - "gegl:matting-levin" now the default engine of Foreground Select
+    tool (when present, as it is an optional feature) as it performs a
+    lot better.
+  - GEGL operations now display a "Sample merged" checkbox in Tool
+    Options. This will be used when the operation allows to pick a color
+    (hence one can pick from the edited layer or from visible data).
+  - "Sample merged" now defaults to being activated in Color Picker and
+    GEGL tools as it seems the less confusing for beginners who don't
+    know of the option yet (according to a small poll we ran).
+
+User interface:
+
+  - In GimpSpinButton, don't propagate Enter key-press events if
+    updating the spin-button's value in response changes the entered
+    text. This prevents confirming dialogs when hitting Enter after
+    entering a math expression in size entries, updating their value
+    instead.
+    Likewise, don't propagate Escape key-press events if a new value was
+    entered, and restore the original value instead.
+  - GimpMemSizeEntry improved to show appropriate binary prefixes
+    (kibibyte, mebibyte and gibibyte) instead of decimal ones, to round
+    properly when using higher units, and to not lose accuracy when
+    possible when displaying in higher units.
+  - Several of the biggest pages of the Preferences dialog are now
+    scrollable, allowing the dialog to fit on smaller displays.
+
+Plug-ins:
+
+  - Add a new GIMP_EXPORT_NEEDS_CROP export capability, which causes
+    gimp_export_image() to crop the exported image content to the image
+    bounds; this is useful for formats that support layers, but have no
+    concept of global image bounds, hence cropping is the only way to
+    enforce the image bounds.
+    When showing the export dialog, give an option to either crop the
+    layers to the image bounds, or to resize the image to fit the
+    layers.
+  - Content type `image/webp` is now recognized (and not only
+    `image/x-webp` as both seem to be in used and this format is
+    unfortunately not yet listed in IANA media types (so various content
+    types are in use, no clear standard apparently).
+  - DDS import is now a bit more permissive, allowing to load some files
+    with invalid header flags regarding compression, while we are able
+    to know the right compression from other flags. This allows to
+    recover invalid DDS files exported by other software.
+  - JPEG detection improved to be more generic and reliable.
+  - HEIF support improvements:
+    - AVIF importing and exporting added (requires libheif 1.8.0+)
+    - 10/12-bit importing and exporting now available for HEIC/AVIF
+    - NCLX color profile import (link with LittleCMS)
+    - Metadata support when importing
+    - "Lossless" option is now called "Nearly lossless (YUV420 format)"
+      because this is actually what it is, hence previous naming was
+      misleading.
+  - TIFF support improvements:
+    - Add an option to crop the layers to the image bounds when exporting
+      individual layers (using GIMP_EXPORT_NEEDS_CROP), since TIFF has no
+      concept of global image bounds otherwise. Cropping is enabled
+      by default.
+    - TIFF export will not override "DocumentName" metadata tag anymore.
+    - Stop writing file paths into TIFF DocumentNames as file paths can
+      contain confidential information such as usernames and directory
+      structures, making the previous behaviour a potential privacy and
+      security risk.
+    - Fix a file descriptor leak case which may have prevented a file
+      from being opened on Windows.
+  - Multiple improvements in the PSP import plug-in:
+    - support reading raster layers of PSP version > 6,
+    - support reading 16-bit integer PSP files,
+    - support reading grayscale and indexed PSP files,
+    - support PSP images with zero-length layer names,
+    - fix wrong layer offset of layers,
+    - fix reading layer names with high bit ASCII characters,
+    - fix incorrect loading of PSP images with uncompressed channel data,
+    - fix reading of creator block data of PSP images,
+    - better error messages describing yet unsupported features,
+    - improve reader stability by always using the block/chunk length.
+  - Spyrogimp now works on Grayscale images and clutters less the undo
+    history.
+  - "Orientation" metadata is now reset whether you accepted to rotate
+    the image or not when importing an image.
+  - XPM does not export a "None" (transparent) color when unused.
+  - BMP always include color masks when exporting BMP with color space
+    info, as mandated by BITMAPV5HEADER specification.
+
+Debugging:
+
+  - Add progressive performance logs: progressive logs contain complete
+    information after each recorded sample, by writing partial address
+    maps at each sample, containing all new addresses introduced by the
+    sample.
+    This allows recording complete logs even in cases where they can't
+    be properly terminated, such as when GIMP crashes or freezes in the
+    middle of the log.
+    Progressive logs are disabled by default, since they potentially
+    increase the sampling cost. They can be enabled through a toggle
+    in the log file-dialog, or through GIMP_PERFORMANCE_LOG_PROGRESSIVE
+    environment variable.
+    Performance log viewer can now process progressive performance logs
+    too.
+  - Allow controlling performance-log parameters through the UI.
+
+Build:
+
+  - new `distcheck` step in Continuous Integration.
+
+Bug fixes:
+
+    #2275, #2668, #2874, #3481, #3868, #4061, #4155, #4328, #4505, #4536,
+    #4560, #4816, #5043, #5069, #5208, #5219, #5226, #5232, #5274, #5275,
+    #5357, #5358, #5472, #5530, #5584, #5592, #5623, #5630, #5651
+
+Translation updates:
+
+  - Basque, Catalan, Chinese (China), Croatian, Danish, French, German,
+    Italian, Japanese, Kazakh, Polish, Russian, Spanish, Swedish, Turkish,
+    Ukrainian
+
+Developers/contributors:
+
+  - Daniel a Simona Novomeská, David A. Russo, Elad Shahar, Ell, Jacob Boerema,
+    Jehan Pages, Liam Quin, lillolollo, luz.paz, Michael Natterer, Michael
+    Schumacher, Øyvind Kolås, Peter Oliver, Simon McVittie
+
+Translators: 
+
+  - Alan01, Alexandre Prokoudine, Anders Jonsson, Asier Sarasua Garmendia,
+    Baurzhan Muftakhidinov, Boyuan Yang, Christian Kirbach, Daniel Mustieles
+    García, Jordi Mas, Julien Hardelin, Marco Ciampa, milotype, Rodrigo Lledó
+    Milanca, Piotr Drąg, Sabri Ünal, sicklylife, Stephan Woidowski, Tim Sabsch,
+    Yuri Chornoivan
+
+Overview of Changes from GIMP 2.10.18 to GIMP 2.10.20
+=====================================================
+
+Tools:
+
+  - Crop tool now has a "Delete cropped pixels" option active only in
+    image crop mode, allowing to choose whether to crop layers or only
+    the canvas (cropped pixels will be made invisible as out-of-canvas
+    but would still be present). The option is unchecked by default,
+    as it is the non-destructive behavior, which also means the
+    default behavior is changed.
+  - Crop tool in image crop mode will not crop layers with "Lock
+    pixels" on, anymore, even if "Delete cropped pixels" is checked.
+  - Painting tools can now restore opacity and blend mode from
+    presets.
+
+User interface:
+
+  - Image / Precision renamed to Image > Encoding
+  - Tool groups can now display their tool list on hover rather than
+    on click. This can be set in Preferences, in the Toolbox tab.
+  - Improved update notification GUI in About dialog, and now also
+    showing an update comment when one was set in gimp_versions.json.
+  - Palette Editor dockable: the color index in the current palette is
+    now shown in front of the color name.
+
+Plugins:
+
+  - In file-psd, make the data_start and data_len fields of the
+    PSDimageres and PSDlayerres structs unsigned, to avoid potential
+    overflow/sign-extension
+  - file-raw: Canon CR3 files are now properly recognized by GIMP and
+    sent to your raw developer software of choice.
+  - PNG and TIFF export: "Save color values from transparent pixels"
+    defaults now to not saving color values (i.e. channels set to 0)
+    when alpha channel is present and 0 itself.
+  - PDF import: multi-pages are now imported in bottom-first order,
+    similar to animated formats, and also similar to defaults for PDF
+    export. This brings consistency but break existing behavior, hence
+    needs to be noted.
+  - Added support for exporting 16-bit PSDs, read and write channels
+    from/to PSd in the right order
+
+Filters:
+
+  - The 'Vignette' filter now has on-canvas controls
+  - New 'Filters -> Blur -> Focus Blur' filter with on-canvas controls
+    to emulate out-of-focus blurring
+  - New 'Filters -> Blur -> Variable Blur' filter that uses an aux
+    mask input to blur an image with variable intensity
+  - New 'Filters -> Light and Shadow -> Bloom' filter
+  
+Updated translations:
+
+  - British English, Catalan, Chinese (Taiwan), Dutch, Finnish,
+    German, Greek, Italian, Korean, Polish, Romanian, Russian,
+    Spanish, Swedish, Turkish, Ukrainian
+
+Icons:
+
+  - Replace fileicon.ico with version contain 24x24, 64x64, 128x128,
+    and 256x256 sizes for Windows icon
+  - Replace wilber.ico with version containing 128x128 size of Windows
+    icon
+
+Bug fixes:
+
+  - #189, #354, #872, #1439, #3405, #3533, #3558, #3777, #3841, #4094,
+    #4328, #4363, #4487, #4618, #4641, #4663, #4696, #4734, #4745,
+    ##4793, 4827, #4846, #4858, #4871, #4895, #4904, #4919, #4967,
+    ##4968, #4992, 4996, #5009, #5010, #5033
+
+Developers:
+
+  - Ell, Jehan, lillolollo, Marco Ciampa, Michael Natterer, Øyvind
+    Kolås, pesder, Salamandar, Sergio Jiménez Herena, Simon Budig, T
+    Collins, woob
+
+Contributors:
+
+  - Nikc, Sabri Ünal, Michael Schumacher, Jernej Simončič, luz.paz
+
+Translators:
+
+  - Alexandre Prokoudine, Anders Jonsson, Bruce Cowan, Cristian
+    Secară, Daniel Korostil, Daniel Șerbănescu, Dimitris Spingos, Jiri
+    Grönroos, Jordi Mas, Nathan Follens, Piotr Drąg, Rodrigo Lledó
+    Milanca, Sabri Ünal, Seong-ho Cho, Tim Sabsch, Yuri Chornoivan,
+    Георгий Тимофеевский
+
+
+Overview of Changes from GIMP 2.10.16 to GIMP 2.10.18
+=====================================================
+
+Core:
+
+  - In gimp:replace, when compositing the same content over itself,
+    i.e., when the input and aux buffers share the same storage and
+    same tile alignment, pass the input buffer directly as output,
+    instead of doing actual processing. In particular, this happens
+    when processing a pass-through group outside of its actual bounds.
+
+User interface:
+
+  - Add new Symbolic-High-Contrast and Symbolic-Inverted-High-Contrast
+    themes, which are automatically-generated high-contrast variants
+    of the (original) Symbolic theme.  The contrast factor is settable
+    in the makefile, and is currently at 1.5 for both themes.
+    
+  - Rename tools/invert-svg to tools/svg-contrast, which now takes a
+    contrast-factor argument, and adjusts the input SVG contrast,
+    instead of just inverting it.  Note that we can still use the tool
+    to invert icons, using a contrast of -1.
+
+  - Allow horizontal scrollbars in all the Preferences dialog tree-
+    views, so that they don't limit the minimal width of the dialog
+    (in particular, the UI- and icon-theme tree-views may contain
+    arbitrarily-long paths).
+
+  - Draw a border around the color FG/BG color areas as a pair of
+    black and white rectangles instead of letting GTK do this. This
+    imporoves the legibility of borders, especially in dark themes.
+
+Tools:
+
+  - In GimpPaintTool, when not snapping brush outline to stroke, make
+    sure to properly snap the cursor position to 15-degree angle
+    multiples in line mode, not only when painting the line, but also
+    during motion.
+
+Plug-ins:
+
+  - Add naive support for CMYK 8-bit PSD files
+
+Updated translations:
+
+  - Basque, Catalan, Danish, Polish, Spanish, Swedish, Ukrainian
+
+Bug fixes:
+
+  - #4643, #4634
+
+Developers:
+
+  - Ell, Massimo Valentini
+
+Translators:
+
+  - Alan Mortensen, Anders Jonsson, Asier Sarasua Garmendia, Daniel
+    Korostil, Jordi Mas, Piotr Drąg, Rodrigo Lledó Milanca
+
+
+Overview of Changes from GIMP 2.10.14 to GIMP 2.10.16
+=====================================================
+
+Core:
+
+  - In gimp_gegl_apply_cached_operation(), use gint64 for storing the
+    total and processed pixel counts used for reporting progress, to
+    avoid overflowing when applying an operation to a large image.
+
+  - In GimpFilterTool and gimp_drawable_apply_operation(), use
+    gimp_drawable_filter_set_add_alpha() to add an alpha channel when
+    applying an operation that specifies "needs-alpha" to a drawable
+    that can have alpha.
+
+  - In GimpFilterTool, move all the drawable-filter option setup to a
+    new gimp_filter_tool_update_filter() function, and call it
+    whenever the drawable-filter's options need to be updated. This
+    avoids duplicating logic in various places.
+
+  - Improve the efficiency of decoding RLE data when loading ABR
+    brushes, by reading entire scanlines into a buffer all-at-once,
+    instead of reading the stream byte-by-byte.
+
+  - GIMP now optionally phones home to find out if there's a new
+    version available and then tells the user if there is one
+    indeed. It also keeps track of the installer revision and then
+    warns if there's a newer installer available. This can be disabled
+    in Preferences. In that case, users still have the option to
+    manually check for an update via the About dialog. The feature can
+    be disabled entirely with the '--disable-check-update' configure
+    switch.
+
+Tools:
+
+  - New 3D Transform tool where you can set vanishing point, camera's
+    focal length, and the move and rotate layer, selection, path, or
+    image in 2.5 space. With the "Unified interaction" option enabled,
+    all three interaction modes of the grid (camera, move, and rotate)
+    are available simultaneously. In this mode, the inner and outer
+    regions of the item are used for moving and rotation, respectively,
+    and the vanishing point is controlled through through a handle.
+
+  - Transform tools now respect the Clip option and update the canvas
+    preview accordingly.
+
+  - New "Composited preview" option allows respecting layer's blending
+    mode and position in the layer stack rather than rendering it as
+    an overlay on top of the overall layer stack. This simplifies
+    creating complex layer compositions greatly. The option requires
+    mipmaps to be used and thus is disabled by default. It also comes
+    with an experimental "Synchronous preview" suboption to render the
+    composited preview synchronously. This reduces the lag for
+    painting the preview, but can harm responsiveness for bigger
+    images, where rendering the preview is slow.
+
+  - Add a new "Preview linked items" option to the transform-grid
+    tools. When this option is enabled, together with composited
+    previews, the transform preview includes all linked layers and
+    channels when transforming a layer/channel. Paths are currently
+    unsupported.
+
+  - New widget called GimpPivotSelector, a 3x3 grid of toggle buttons,
+    is now used for selecting a natural pivot position (e.g. for a
+    transform) relative to an item: its center, its corners, and the
+    midpoints of its edges. Currently used in Rotate and 3D Transform
+    tools.
+ 
+  - Add "Show all" support to the Bucket Fill tool in line-art mode
+
+  - Color picker and sample points now support displaying values in
+    Yu'v' (CIE 1976 UCS) color space.
+
+  - The Symmetry Painting dock now has an "Enable reflection" option
+    that allows painting patterns resembling a kaleidoscope.
+
+  - Transform clipping is temporarily disabled for layer groups. No
+    preview other than 'Adjust' works anyway. This will be fixed later
+    on.
+
+  - Construct a box-filtered mipmap hierarchy for the original brush
+    on-demand, and the closest mipmap is used as the resampling source
+    for downscaled brushes, significantly improving the output
+    quality.
+
+  - Now that painting is done in a separate thread, the display update
+    rate has a far smaller impact on it. Increase the GimpDisplay
+    update rate, which handles image updates, to 60 FPS, and the
+    GimpDrawTool update rate to 120 FPS. In particular, the latter
+    change makes the brush outline motion much smoother.
+
+  - In the Airbrush tool, increase the maximal stamp FPS from 15 to
+    60, and change the corresponding maximal Rate value from 150 to
+    100. This technically affects tool presets, but we'll live.
+
+  - Add a new "Snap brush outline to stroke" toggle to the "Image
+    Windows" preferences page. When enabled, the brush outline in
+    paint tools snaps to the individual dabs while painting, which is
+    how it worked before version 2.10.16. Disable the option by
+    default.  This seems to be what most other programs are doing, and
+    it does give paitning a smoother feel.
+
+  - The Warp Transform tool now respects settings for painting tools:
+    showing the brush outline, snapping to dabs, and showing the paint
+    tool cursor.
+
+UI:
+
+  - Tools are now logically grouped in the toolbox by default. Users
+    can customize the groups to their liking or disable this feature
+    altogether in the Preferences dialog (Interface / Toolbox page).
+
+  - New opt-out compact style for sliders with revamped interaction.
+    The widget uses a narrower layout, and the different
+    upper/lower-half behavior is gone. Instead, the behavior depends
+    on the mouse button and modifier used:
+
+    - left-click is used for absolute adjustment,
+    - Shift + left-click + drag changes value in small increments,
+    - Ctrl + left-click + drag changes value in large increments,
+    - middle-click enables numeric input mode;
+    - right-click enables numeric input mode and selects the value.
+
+  - The "You can drop dockable dialogs here" message is gone from the
+    toolbox for good. Instead, highlight dockable areas when a user
+    starts dragging a dockable dialog, and intensify the highlight as
+    the dialog goes over a dockable area.
+
+  - Consolidate UI for merging down and anchoring layers:
+    As they are both mutually exclusive and serve an almost identical
+    purpose, the "Merge down" and "Anchor Layer" are given mutually
+    exclusive visibility in menus, and the anchor button is replaced
+    with a merge down button in the Layers dockable whenever there is
+    no active floating selection. Modifier keys are available:
+
+    - Shift: merge layer group
+    - Ctrl: merge visible layers
+    - Ctrl + Shift: merge visible layers from last used values
+
+Plugins:
+
+  - In plug_in_compat.pdb, when wrapping an op node inside a graph,
+    set the op node as the graph node's underlying operation. This
+    allows gimp_gegl_apply_operation() to perform certain
+    optimizations.
+
+  - The Spyrogimp plugin now features a Visual tab where the inner
+    mechanics of a spirograph is abstracted away, and you operate on
+    amount of petals etc. The plugin now also allows saving a pattern
+    as a path rather than rendering it to a layer as a bitmap.
+
+  - Improve the loading speed for PSD files, mostly by eliminating
+    excessive copies.
+
+Filters:
+
+  - Don't disable gegl:color-to-alpha (which has "needs-alpha") 
+    when the drawable doesn't have an alpha channel, if one can be
+    added.
+
+  - Don't disable color-to-alpha for grayscale drawable, since the
+    operation is applicable to grayscale images (in particular, it
+    doesn't add color where there was none), and since GIMP no longer
+    distinguishes between layers and channels according to the
+    drawable format when updating the filters actions.
+
+Windows:
+
+  - Installer: unofficial languages, ghostscript 9.50.
+  - Installer: skip .debug files when they don't exist.
+  - Installer: properly remove old icons on 32-bit installs and
+    per-user installs.
+
+macOS:
+
+  - Set required variables if it is running from Apple application
+    bundle.
+  - The macOS build now ships with the dashboard dock for displaying
+    performance graphs.
+
+Updated translations:
+
+  - British English, Catalan, Danish, French, German, Hungarian,
+    Icelandic, Italian, Japanese, Polish, Russian, Spanish, Swedish,
+    Turkish, Ukrainian.
+
+Bugfixes:
+
+   - #4172, #4194, #4205, #4218, #2543, #4185, #4246, #2794, #4209,
+     #4278, #4372, #4187, #4392, #2674, #4338, #2862, #4203, #4204,
+     #4354, #1266, #4584, #4174, #4285, #4366, #1975, #4605
+
+Developers:
+
+  - Alex Samorukov, Cyril Richard, Elad Shahar, Ell, Elle Stone,
+    Jehan, Jernej Simončič, lillolollo, Massimo Valentini, Michael
+    Natterer, Pascal Terjan, woob.
+
+Translators:
+
+  - Alan Mortensen, Alexandre Prokoudine, Anders Jonsson, Balázs
+    Meskó, Balázs Úr, Bruce Cowan, Daniel Korostil, Jordi Mas, Julien
+    Hardelin, Marco Ciampa, Piotr Drąg, Rodrigo Lledó Milanca, Ryuta
+    Fujii, Sabri Ünal, sicklylife, Sveinn í Felli, Tim Sabsch, Zander
+    Brown.
+
+
+Overview of Changes from GIMP 2.10.12 to GIMP 2.10.14
+=====================================================
+
+Core:
+
+  - New "Selected areas continue outside the image" toggle option to
+    the "Feather Selection" dialog.
+  - New "Allow editing on non-visible layers" setting in Preferences
+    to allow painting, transforming, and selecting on layers with
+    toggled off visibility.
+  - XCF loading a bit more resilient to corruption: it doesn't stop
+    any more at the first layer or channel error; instead it tries to
+    load more layers/channels to salvage as much data as possible from
+    a corrupted XCF file.
+  - In gimp:gradient, fix dithering to correspond to how we actually
+    round float values to 8-bit. In particular, this avoids
+    introducing noise when a component is fixed at 0 or 1 along a
+    segment.
+  - New "Show All" view mode allowing to show pixels outside the
+    canvas boundary.
+  - New "Show Canvas Boundary" option to render a dotted line around
+    the canvas boundary.
+  - New "Keep Padding in "Show All" Mode" option, also available as a
+    default option via Preferences, to preserve the padding color
+    instead of displaying the checkerboard.
+  - Several features updated to react as expected when run
+    out-of-canvas: color-picking, canvas grid, transform tools, bucket
+    fill, and more.
+  - Loaded images' pixel density will now default to 72 PPI when no
+    explicit resolution information was stored in the imported file.
+    Newly created images' default pixel density will continue to be
+    based on the default image template (with value 300 PPI if it has
+    not be changed), yet not loaded images anymore. 72 PPI is the
+    common default in most software (and in standards such as Exif) so
+    it makes sense we stick to it, only for loaded images.
+
+Tools:
+
+  - Free Select tool: fast copy|cut-paste modifiers (Alt + Ctrl|Shift)
+    are now working even when the selection is not committed. Starting
+    a fast copy|cut-paste will automatically close the polygon and
+    commit the selection, accelerating fast usage of free selections.
+  - Foreground Select tool: new "Grayscale" Preview Mode. Also, a
+    color selector for "Color" preview (original preview mode) now
+    available, to select any color and opacity for the preview.
+  - Add a new "Image" transform type to the transform tools, in
+    addition to the existing "Layer", "Selection", and "Path"
+    transform types.  The "Image" mode transforms the entire image,
+    rather than a single item. In tools with a preview, the preview
+    shows the transformed image projection.  The clipping mode
+    controls how the canvas is clipped during the transform; in
+    particular, the ADJUST clipping mode resizes the canvas to fit its
+    transformed size.
+  - In GimpFilterTool, add a new "clipping" option, which can be
+    either Adjust or Clip.  This option is controllable for layers,
+    when there's no selection mask.
+    When set to Adjust, which is used by default, the filter's output
+    may extent past the drawable's boundary, and the drawable will be
+    resized to match the output when committed.
+  - Gradient tool: offset support in shaped gradients
+
+Plug-ins:
+
+  - Simple 8-bit port of filters to GEGL: nl-filter, film,
+    fractal-explorer, flame, blinds, jigsaw, gradient-flare,
+    checkerboard, tile-small, curve-bend, sample-colorize, map-object,
+    lighting, grid, despeckle, sphere-designer, contrast-retinex, hot,
+    sparkle, cml-explorer, destripe, twain, animation-optimize,
+    depth-merge, warp, imagemap, gimpressionist
+  - Port of filters to GEGL with float support: van-gogh-lic.
+  - Add color profile support for HEIF (only when libheif 1.4.0 is
+    available).
+  - TIFF import will now ask (in interactive mode) how to process
+    unspecified TIFF channels: non-premultiplied (used to be the
+    default) alpha, premultiplied alpha, or just import as generic
+    channel.
+  - HEIF export now improved with same profile logics as JPEG or WebP
+    (it can actually export higher bit-depth data, so profile logics
+    should be the one as in PNG, but we only support 8 bpc HEIF for
+    the time being).
+  - HEIF export dialog now has a "Save color profile" checkbox
+    allowing to not export with a profile when needed (needs libheif
+    1.4.0 or higher).
+  - PDF exporting: text layers in layer groups are now exported as
+    proper text.
+  - Cleaned up the file-dds GUI, removed the "Advanced" expander.
+  - gimptool external tool now install plug-ins into subfolders (this
+    is not mandatory in GIMP 2.10 yet, unlike future GIMP 3, but is
+    already the recommended folder structure for plug-ins).
+  - 3 procedures ("color-decode-ycocg", "color-decode-ycocg-scaled"
+    and "color-decode-alpha-exp") removed from file-dds plug-in
+    because they are hacks which should stay internal to the plug-in
+    and are semantically wrong because colors in drawables are never
+    in such formats.
+
+Filters:
+
+  - New "Normal Map" filter to generate normal maps from height maps
+    in the Generic section.
+  - Replace old filters with GEGL operation counterparts: edge-neon
+    (gegl:edge-neon), contrast-normalize (gegl:stretch-contrast),
+    oilify (gegl:oilify)
+  - Add gegl:bayer-matrix and gegl:linear-sinusoid to Filters ->
+    Render -> Pattern.
+  - Add gegl:newsprint to Filters -> Distorts.
+  - Add gegl:mean-curvature-blur to Filters -> Blur.
+
+Performance:
+
+  - Add an active-thread variable to the dashboard's misc group,
+    showing the number of active worker threads.
+  - Reduce time complexity of layer-group translation. When
+    translating a layer group, avoid separately updating the original
+    area of the child layers before translating them (as per the fix
+    to issue #3484), as this results in quadratic time complexity
+    w.r.t. to the maximal subgroup nesting level. Instead, simply
+    defer the updating of the group's offset until *after* translating
+    the child layers, so that their original area isn't clipped by the
+    parent, while their new area is still properly updated even if the
+    parent's size changes.
+
+User interface:
+
+  - Many mnemonics added in various dialogs.
+  - Add a gimp-rotate-image-arbitrary action, and a corresponding
+    "Image -> Transform -> Arbitrary Rotation..." menu entry, which
+    activates the rotate tool in image mode (similarly to the
+    corresponding action for layers).
+  - On Windows, minimized GIMP window is now deiconified when GIMP is
+    run again (clicking its shortcut or otherwise).
+
+Preferences:
+
+  - New "Swap compression" option: explicit control over the tile-swap
+    compression algorithm in GEGL. "Best performance" is used by
+    default, "Balanced", "Best compression", and "None" (disables
+    compression) are available.
+
+Devel docs:
+
+  - Update the libgimpconfig and libgimpbase docs.
+  - Update docs with missing symbols and types.
+  - New docs for structs and enums.
+
+Installers:
+
+  - Install 64-bit Python on 64-bit Windows (until now, the installer
+    used to install 32-bit Python for all architectures).
+  - Windows installer now supports per-user install.
+
+Debugging:
+
+  - New mnemonic-clashes tool to help looking for mnemonic clashes.
+
+Translations:
+
+  - Basque, Brazilian Portuguese, British English, Catalan, Chinese
+    (Taiwan), Croatian, Danish, Dutch, French, German, Greek,
+    Hungarian, Icelandic, Indonesian, Italian, Latvian, Polish,
+    Russian, Slovenian, Spanish, Swedish, Turkish.
+
+Bugfixes:
+
+   - #3630, #3226, #3610, #1725, #3093, #3599, #3597, #3082, #3553, #3435,
+     #3503, #3532, #3164, #3560, #3500, #3493, #3514, #3512, #2685, #3641,
+     #1002, #360,  #3263, #2221, #3893, #2708, #3100, #2873, #3655, #2206,
+     #3341, #3718, #3763, #3112, #3723, #4049, #4068, #3663, #4119, #4008,
+     #2837, #3994, #3990, #1283, #2561
+
+Code contributors:
+
+   Alexandre Prokoudine, Ell, Federico Mena Quintero, Jehan, Jernej
+   Simončič, Lionel, Massimo Valentini, Michael Natterer, Michael
+   Schumacher, Oleksii Samorukov, Sabri Ünal, Sergio Jiménez Herena,
+   Thomas Manni, lillolollo, sarah, woob, Øyvind Kolås.
+
+Translators:
+
+   Alan Mortensen, Alexandre Prokoudine, Anders Jonsson, Andika
+   Triwidada, Asier Sarasua Garmendia, Balázs Meskó, Balázs Úr, Bruce
+   Cowan, Claude Paroz, Daniel Mustieles García, Dimitris Spingos,
+   Emin Tufan Çetin, Hannie Dumoleyn, Jordi Mas, Julia Dronova, Julien
+   Hardelin, Marco Ciampa, Martin Srebotnjak, Milo Ivir, pesder, Piotr
+   Drąg, Rafael Fontenelle, Rodrigo Lledó Milanca, Rūdolfs Mazurs,
+   Sabri Ünal, Sveinn í Felli, Tim Sabsch, Zander Brown.
+
+
+Overview of Changes from GIMP 2.10.10 to GIMP 2.10.12
+=====================================================
+
+Core:
+
+  - Add an "Incremental" option to the Dodge/Burn tool, which,
+    similarly to the Paintbrush, Pencil, and Eraser tools, applies the
+    effect incrementally as the pointer moves.
+  - Curves now have a concept of smooth vs corner points: smooth
+    points produce a smooth curve, while corner points produce a sharp
+    curve (previously, all points were smooth).
+  - Search the user font directory path on Windows (since Windows 10,
+    non-admin users have the ability to install fonts). This is only a
+    temporary hack until fontconfig adds proper upstream support:
+    https://gitlab.freedesktop.org/fontconfig/fontconfig/issues/144
+  - In gimp_brush_core_get_paint_buffer(), when allocating a new paint
+    buffer, clear the old buffer *before* allocating the new one, to
+    reduce the amount of simultaneously allocated memory.
+  - In GimpPaintbrush, avoid refilling the paint buffer at each dab if
+    the paint color/pixmap hasn't changed, hence allowing faster
+    painting in some specific cases.
+  - Add hygon cpu detection and enable MMX/SSE support.
+  - Add a GimpSymmetry::get_transform() virtual function and a
+    corresponding gimp_symmetry_get_transform() function which return
+    the brush transform corresponding to a given symmetry stroke in
+    terms of the rotation angle and reflection flag (in contrast to
+    gimp_symmetry_get_operation() which returns the same transforation
+    in terms of a GeglNode). This allows us to simplify, fix (artifact
+    bugs, etc.), and improve the painting-code performance for several
+    symmetry painting cases.
+  - New gimp-brush-pipe-spacing parasite set by core code to preserve
+    GIH brush's spacing across reloads.
+  - Add a new Offset filter tool, as a front-end to gimp:offset. The
+    tool replaces, and provides the same interface as the drawable-
+    offset dialog while also providing live preview and on-canvas
+    interaction.
+
+Plug-ins:
+
+  - Exported profile and data format strategy updated in several file
+    plug-ins.
+
+    * When not saving a profile, we always export as sRGB data, as most
+      viewers would not display the image properly otherwise.
+    * When saving a profile:
+        * If a profile was manually assigned, we always export to the
+          assigned format, hence pixel data is converted accordingly,
+	  whatever the work format.
+        * If no profile was assigned:
+            * If the export format support high-bit depth, we export the
+              work format as-is.
+            * If the export format is 8-bit max, we convert the work
+              format to sRGB, except if the work format is 8-bit linear.
+
+    The following plug-ins were updated: JPEG, PNG, TIFF and WebP.
+
+  - TIFF plug-in now supports layer export.
+  - Add accelerator on "Save color _profile" item in JPEG export so
+    that all items in the dialog have keyboard accelerators.
+  - Add a "Save color profile" checkbox in WebP export and remove the
+    "Advanced Options" expander (all metadata and profile writing
+    options are now directly visible).
+  - Process cases of non-conformant TIFF file with extra channels
+    while ExtraSamples is not set by assuming the first extra channel
+    is a non-premultiplied alpha channel and outputting a warning. In
+    the future, this should be updated further by a dialog asking what
+    to do with the non-defined dialog (consider as premultiplied or
+    non-premultiplied alpha channel, or just save as extra channels).
+
+Tools:
+
+  - Add input/output spin-buttons to the Curves tool, which allow
+    setting the selected point's coordinates numerically. When the image
+    precision is greater than 8-bpc, use a 0.00-100.00 range for the
+    point-coordinate spin-buttons instead of a 0-255 range.
+  - In the Curves tool, allow changing the curve's point types (cf. new
+    curve corner points in Core section). Corner points are displayed
+    with a diamond shape instead of a circle.
+  - Free Select tool now creates a selection as soon as the polygon is
+    closed. This selection is updated when the polygon, or the relevant
+    tool-options, change, similarly to GimpRectangleSelectTool.
+  - Derive GimpEraser from GimpPaintbrush, instead of directly from
+    GimpBrushCore.
+    This allows GimpEraser to reuse the paint-buffer content across
+    dabs, improving performance.
+  - Allow moving an intersecting pair of guides with the Move tool.
+
+User interface:
+
+  - In GimpCurveView, when dragging an existing curve point, don't
+    immediately move the point to the cursor position upon button
+    press, but rather move it relative to its current position as the
+    cursor moves. This allows selecting a point without moving it, and
+    adjusting its position more easily.
+  - when the cursor hovers above a point in GimpCurveView, or when
+    dragging a point, have the coordinate indicator show the point's
+    position, rather than the cursor's.
+  - In GimpCurveView, when holding down Ctrl while adding/dragging a
+    point, snap the y-coordinate to the original curve (at the start
+    of the drag). This is particularly useful for adding points along
+    the curve.
+  - In GimpDashboard, don't show legend for groups with no meter.
+  - Add a tile-alloc-total variable to the dashboard's memory and misc
+    groups, showing the total amount of memory used by the tile
+    allocator.
+  - Add a "Save Keyboard Shortcuts Now" button to the Configure
+    Keyboard Shortcuts dialog.
+
+Installers:
+
+  - Windows: enable InnoSetup "unofficial" translations. Otherwise we
+    had a bunch of wasted work from our translators of several
+    languages whose translations were never used in the installer.
+
+Translations:
+
+   - 12 translations were updated: Catalan, Chinese, French, German,
+     Hungarian, Indonesian, Italian, Polish, Russian, Spanish, Swedish
+     and Turkish.
+
+
+Overview of Changes from GIMP 2.10.8 to GIMP 2.10.10
+====================================================
+
+Core:
+
+  - Add gimp-scratch allocator, a fast memory allocator (on the order of
+    magnitude of alloca()), suitable for small (up to a few megabytes),
+    short-lived (usually, bound to the current stack-frame) allocations.
+    Unlike alloca(), gimp-scratch doesn't use the stack, and is therefore
+    safer, and will also serve bigger requests, by falling-back to malloc().
+  - In gimp_drawable_transform_buffer_affine(), avoid modifying the
+    clipping mode when transforming layer masks, since this function
+    is used (among other things) to transform layer masks together with
+    their layer, in which case they should use the same clipping mode
+    as the layer. This fixes a regression introduced by commit 2ae823ba,
+    causing layer masks to be transformed with a mismatched clipping mode
+    during layer transforms, leading to discrepancies between the
+    transformed layer and the transformed mask.
+  - Moved swap/cache and temporary files out the GIMP user config dir and
+    added new config file substitutions ${gimp_cache_dir} and
+    ${gimp_temp_dir}.
+  - Pass the GEGL tile-cache size, swap path, and thread-count to plug-ins
+    as part of their config, and have libgimp set the plug-in's GeglConfig
+    accordingly upon initialization.
+  - Layer groups are now rendered in bigger chunks rather than tile-by-tile
+    (which used to pretty much eliminate multithreading for groups), which
+    improves the rendering speed.
+  - Make saving/exporting files more robust to errors. In particular if
+    an error occurs during the process (be it a bug, a memory error, or
+    anything else), GIMP won't overwrite anymore any existing file with
+    incomplete contents, so that you won't end up with no valid files at
+    all.
+  - Fix a regression on support of various graphics tablet.
+  - Remove the "Edit -> Fade..." feature: it makes GIMP use two buffers
+    instead of one (east into system resources), it's broken in 2.10, and
+    we can make the UX better for filters.
+  - New generic canvas modifier 'Alt + middle click' allowing to pick
+    layers by clicking on pixels. The available layers will be looped
+    through (starting from the upper one) while Alt key is hold and the
+    picked layer name will be temporarily displayed in the status bar.
+  - When clearing a channel, do nothing if the channel is already empty;
+    otherwise, align the cleared rectangle to the channel buffer's tile
+    grid, so that all affected tiles are dropped, rather than zeroed.
+    Furthermore, only update the affected region of the channel.
+  - Brush and pattern saving logics has been moved to core code (instead
+    of plug-in).
+  - Clipboard brushes and pattern can now be duplicated.
+  - Parametric brushes are now 32-bit float to avoid posterization on
+    large brushes.
+    Note: raster brushes are still 8-bit and plug-ins only have access
+    to 8-bit versions of high-precision brushes/patterns. New API will
+    be required to handle high-precision data.
+  - On-canvas preview while editing a color in the colormap of an
+    indexed image.
+
+User interface:
+
+  - Enabled HiDPI/Retina support for the GTK2/OSX build, fixes blurry icons. 
+  - Add a tooltip to the "better compression" checkbox in save dialog to
+    make it clearer it does not mean that the file size is necessarily
+    smaller in every cases. In particular some best/worst case are
+    possible when an algorithm less efficient in general may end up
+    better on a particular image.
+  - Add basic support for cursors with a scale factor of 2 for HiDPI
+    (artwork to be updated).
+  - Foreground and background color icons, as well as color history will
+    now display out-of-gamut warning on indexed images for colors
+    outside of the palette, as well as on grayscale images, for non-gray
+    colors.
+  - Pack color picker and hexadecimal entry on same line in Color dock.
+  - Add an "Open as Image" button to the brushes dialog.
+
+Usability:
+
+  - Attempting to transform locked layers or paint on them now results in
+    blinking around the status bar (where the warning message is displayed)
+    and around the toolbar where lock toggles are. The same applies to
+    attempting to move a selection where there is none — GIMP will blink
+    around the toolbar where the moving target (layer, selection, path)
+    is chosen.
+  - GIMP now allows selecting default export file type for new projects.
+    The choice is limited to PNG, JPEG, WebP, PSD, ORA, TIFF, BMP.
+  - GimpSpinScale widget now has an optional feature to constrain the
+    value to integer when dragging with a pointer (even if the scale
+    allows for fractional numbers), set with new function
+    gimp_spin_scale_set_constrain_drag().
+    This is useful for settings where fractional numbers are technically
+    possible, yet most common use case are with integers (such as pixel
+    sizes, angles in degrees, etc.) so you want the easy interface to be
+    constrained. Fractional numbers are still settable, for instance by
+    keyboard edit; and arrow incrementation won't drop fraction parts.
+    This is currently only activated for brush options in paint tools.
+
+Tools:
+
+  - In scale tool, scale around center even when using numeric input.
+  - New algorithm in the Bucket Fill tool when selecting the affected
+    area "Fill by line art detection", based off the G'Mic algorithm for
+    "smart colorization": https://hal.archives-ouvertes.fr/hal-01891876
+    In a few words, it identifies painted pixels (either based on
+    grayscale or opacity values) and tries to close line arts to allow
+    filling even with not perfectly closed zones; the second step of the
+    algorithm will flood the colors under line art pixels to prevent
+    "holes" in the filling.
+    It is possible to control a max size (in pixels) for the flooding,
+    as well as max length of closing segments and splines.
+  - The Bucket Fill tool got new interaction allowing to hold the click
+    and move the mouse to fill based on several seed zones (for "Fill
+    by line art detection" as well as "Fill similar colors"). You can
+    now cancel the fill in progress with right click as in other tools.
+  - The Bucket Fill tool now allows color picking with ctrl-click, same
+    as every painting tool. It will pick either the foreground or
+    background color depending on the selected Fill Type. The ctrl-alt
+    modifier combination is also possible to pick the non-Fill Type
+    color.
+  - In the Bucket Fill tool, the Alt modifier will now switch to
+    "FG color fill" when "Pattern fill" was set (instead of doing
+    nothing).
+  - In the Unified Transform tool, default to preserving aspect ratio
+    when scaling up or down.
+  - In the Healing tool, "Sample merged" now also work for the target
+    pixels, allowing to draw in empty layers.
+  - Selection by color is now parallelized, hence improving speed of the
+    Select by Color tool (and any other processing which may share this
+    piece of code now or in the future).
+  - Add "Constrain handles" and "Around center" options to the
+    perspective-transform tool's GUI, which are similar to the
+    corresponding options of the unified-transform tool.
+  - Improve color picking on indexed image to always select an indexed
+    color corresponding to the picked pixel in the colormap.
+
+Plug-ins:
+
+  - file-pdf-save GUI now clearly indicates the order the layers will be
+    used to make multi-page PDFs.
+  - Add DDS loading/exporting plug-in originally developed by Shawn Kirst
+    and Arne Reuter.
+  - Rename the Guillotine plug-in to Slice Using Guides.
+  - Add a new option saving a color profile when exporting PNG, JPEG, TIFF.
+    Always save it when exporting to PSD.
+  - Remove the "Advanced" expanders from the PNG and TIFF export dialogs.
+  - Full rewrite of the Spyrogimp plug-in with much more options and
+    better interaction.
+  - Indexed TIFF with alpha channel now supported.
+
+Filters:
+
+  - Add on-canvas GUI (simple lines) for circular, linear, and zoom motion
+    blur.
+
+Help:
+
+  - Link to the bugtracker directly from the Help menu, also link to the
+    wiki and the roadmap. Remove the link to currently disabled
+    registry.gimp.org.
+
+Installers:
+
+  - Windows: proper fix for libthai to stop GIMP from crashing in the
+    Thai locale. 
+
+Translations:
+
+  - Czech, Danish, French, Italian, Japanese, Marathi, Polish, Russian,
+    Spanish, Swedish, Ukrainian.
+
+Build:
+
+  - Bumping GTK+ dependency to the micro update GTK+ 2.24.32 to handle
+    several bugs on Windows (broken shortcuts on non-latin layouts and
+    broken vector icons).
+
+
+Overview of Changes from GIMP 2.10.6 to GIMP 2.10.8
+===================================================
+
+Core:
+
+  - Use adaptive chunk size in GimpProjection when rendering the
+    projection asynchronously, rather than using a fixed chunk size.
+    This provides a better trade-off between throughput and
+    responsiveness dynamically, based on how fast the processing is.
+  - Add xyY color space to the color spaces for sampling colors.
+
+Tools:
+
+  - In all selection tools, show error on attempt to
+    subtract-from/intersect-with empty selection.
+  - Fix text along path not working with vertical text.
+  - Fix Text tool's frame position when undoing a move operation.
+  - Streamline Text tool's drawing blocking/unblocking logic.
+  - When moving a text layer using the text tool (through alt+drag),
+    don't change the layer's box mode to "fixed", which is unnecessary,
+    since the layer's size isn't affected.
+  - Transform and deformation operations now maintain color for fully
+    transparent pixels, making unerase and curves manipulation of alpha
+    channel more reliable.
+  - All transform tools now apply changes when you save or export/overwrite
+    an image without pressing Enter first to confirm changes.
+  - Heal, Dodge/Burn, Smudge, and Convolve tools now adjust the processed
+    buffer and mask_buffer regions according to the changes made to the
+    application region, as calculated by intersecting it with the
+    drawable and mask extents. This fixes wrong application position
+    when painting on a drawable whose origin is above/to the left of the
+    image's origin, and there's a selection active.
+  - New type of gradient interpolation called 'Step' for making multi-color
+    hard-edge gradient fills.
+
+Plug-ins:
+
+  - Port all plug-ins to the new iterator API in GEGL.
+  - Improve automatic detection of HEIC/HEIF files.
+  - Improve RawTherapee discovery by looking up registry key (should
+    become useful with RawTherapee 5.5 and more).
+
+Usability and UI:
+
+  - Compatibility information in the Save dialog is now more understandable.
+    The minimum GIMP version for the XCF file is always written down when it
+    is GIMP 2.8 or over. The list of features warranting the minimum version
+    is now listed in an expander container rather than as tooltip, which
+    makes it more discoverable. The warning on compression is now displayed
+    as its own text under the checkbox and not as additional text to the
+    minimum GIMP version label.
+  - In all themes, fix the color of selected text, while editing a tree-view's
+    item text (such as when renaming a layer), by overriding tree-view
+    specific styling with the global text-entry style, for nested text entries
+    inside tree-views. The text would previously use the same color as the
+    selection background, making it unreadable.
+  - Add option in the Windows menu to hide the image tab bar.
+
+CLI:
+
+  - New self-explanatory --enable-win32-debug-console CLI option
+
+Debugging:
+
+  - New GimpBacktrace API provides an interface for creating and
+    traversing multi-threaded backtraces, as well as querying symbol
+    information. Backends are available for Linux and Windows.
+  - Performance log recording now available in the Dashboard dock.
+    The log contains a series of samples of the dashboard variables,
+    as well as the full program backtrace, when available. As such,
+    it essentially acts as a built-in profiler, which allows us to
+    correlate program execution with the information available
+    through the Dashboard.
+  - New performance-log-expand.py tool decodes a delta-encoded
+    performance log by expanding the deltas, producing a log where
+    each sample (and other relevant elements) contain complete
+    information. The structure of expanded logs is identical to that
+    of delta-encoded logs, the expanded log simply has no deltas.
+  - New performance-log-resolve.py tool resolves symbol information
+    in backtraces. The logs produced by GIMP only specify the program
+    counter at each stack frame, providing an address-map to map
+    program-counter addresses to actual symbols separately. This tool
+    looks up each program-counter address in the address map,
+    incorporating the relevant symbol information directly into the
+    backtrace.
+  - New performance-log-deduce.py tool that statistically deduces the
+    correct thread states based on backtrace address frequency, fixing
+    local inaccuracies.
+  - New performance-log-viewer.py tool that is a viewer for GIMP
+    performance logs, with a sample-selection area at the top and an
+    information area at the bottom. The sample-selection area visualizes
+    the sampled variables and markers using a simultaneous set of plots,
+    and displays the currently selected samples. The information area
+    shows global information stored in the log, as well as information
+    specific to the currently selected samples, including variable listing
+    and statistics, full backtrace, and profile/call-graph information.
+
+Translations:
+
+  - Updated translations: Danish, Dutch, Finnish, German, Hungarian,
+    Italian, Marathi, Polish, Portuguese (Brazil), Russian, Spanish,
+    Swedish, Ukrainian.
+
+
+Overview of Changes from GIMP 2.10.4 to GIMP 2.10.6
+===================================================
+
+Core:
+
+  - Render drawable previews asynchronously.
+  - Merge the file view filter and file format lists in GimpFileDialog.
+    The presence of 2 lists was very confusing.
+  - DLL search priority is now updated before running a plug-in on
+    Windows, depending on the executable bitness. This gets rid of one
+    of the last remnant of DLL hell in GIMP, which was when running
+    32-bit plug-ins from a 64-bit build of GIMP.
+
+Filters:
+
+  - New "Little Planet" (gegl:stereographic-projection) filter.
+  - New "Long Shadow" (gegl:long-shadow) filter.
+
+Tools:
+
+  - Halt the Measure tool after straightening.
+  - Add an "orientation" option to the measure tool, corresponding to
+    the "orientation" property of GimpToolCompass (i.e., it controls the
+    orientation against which the angle is measured, when not in 3-
+    point mode.)  The orientation is "auto" by default, so that the
+    angle is always <= 45 deg.  Note that the "orientation" option
+    affects the tool's "straighten" function, so that the layer is
+    rotated toward the current orientation.
+  - Text layers can now represent vertical texts, with 4 variants:
+    left-to-right and right-to-left lines, and forcing all characters to
+    be upright or following Unicode's vertical orientation property.
+    See also:
+    * https://www.unicode.org/reports/tr50/
+    * http://www.unicode.org/Public/UCD/latest/ucd/VerticalOrientation.txt
+
+User Interface:
+
+  - The Dashboard dockable dialog now has an "async" field to the
+    dashboard's "misc" group, showing the number of async operations
+    currently in the "running" state.
+  - New Preferences option to enable/disable layer-group previews, since
+    these can get quite time-expensive.
+
+Translations:
+
+  - New language: Marathi
+  - 12 translations were updated: Brazilian Portuguese, Dutch, French,
+    German, Greek, Italian, Latvian, Polish, Romanian, Slovenian,
+    Spanish, Swedish.
+
+Build:
+
+  - Add --with-win32-32bit-dll-folder configuration option to override
+    the folder where 32-bit versions of DLL will be installed (default:
+    32/bin/).
+  - Install all plug-ins in their own directories. Unlike on master,
+    this is not mandatory to do so, but it would protect our core
+    plug-ins against any DLL installed directly under plug-ins/ by
+    third-party plug-ins (cf. Windows DLL hell).
+
+
+Overview of Changes from GIMP 2.10.2 to GIMP 2.10.4
+===================================================
+
+Core:
+
+  - Remove gimp_display_shell_draw_background() and all clipping hacks
+    for drawing the canvas background. This optimizes away one entire
+    step of drawing of image size, for each expose.
+  - Font loading does not block startup anymore. Only consequence is
+    that the Text tool may not be usable immediately if fonts are not
+    fully loaded yet (and will output an appropriate error if you do
+    so). All non-text related activities can be performed right away.
+  - Change of the URL from bugzilla to gitlab where appropriate.
+  - New tool option manager to better keep track of user context and
+    paint options in a consistent manner.
+
+User Interface:
+
+  - The Dashboard dockable dialog now has a 'Memory' group that shows
+    memory-usage information: the currently used memory size, the
+    available physical memory size, and the total physical memory
+    size.  It can also show the tile-cache size, for comparison
+    against the other memory stats. Note that the upper-bound of the
+    meter is the physical memory size, so the memory usage may be over
+    100% when GIMP uses the swap.
+  - The Dashboard dockable dialog now has "read" and "written" fields in
+    the dashboard swap group, which report the total amount of data
+    read-from/written-to the tile swap, respetively. Additionally, the
+    swap busy indicator (used as the meter's LED) has been improved,
+    so that it's active whenever data has been read-from/written-to
+    the swap during the last sampling interval, rather than at the
+    point of sampling.
+  - Fonts can now be tagged. The user interface is the same as for
+    brushes, patterns etc.
+  - Some icons fixed: larger spacing between broken chains and
+    gimp-tool-ellipse-select made symmetrical.
+
+Usability:
+
+  - When a plug-in cannot be applied to an image because of mismatch
+    in image types (e.g. layer has no alpha or image is greyscale),
+    GIMP now displays a message listing supported image types for this
+    plug-in.
+
+Tools:
+
+  - The Measurement tool now has an "Auto straighten" option allowing
+    to rotate the active drawable (layer, channel…) so that the
+    measurement line is used as horizon. As other transform tools, the
+    feature will work on linked drawables as well.
+  - The Smudge tool now paints correctly on images with a color
+    profile other than the GIMP's built-in one.
+
+Build:
+
+  - Installer: set compatibility options to run Python plugins in
+    HiDPI-aware mode.
+  - Put back compatibility DLLs for really old plugins.
+  - Install binary tool `gimp-test-clipboard` on the system to allow
+    people to help us debug clipboard bugs.
+  - --enable-bundled-mypaint-brushes renamed
+    --enable-relocatable-bundle and also make WMF fonts looked up on
+    the runtime prefix of GIMP (instead of the build-time path) when
+    this build option was set.
+  
+Plug-ins:
+
+  - gimptool-2.0 binary now accepts source files with non-standard
+    extensions if it can try to guess appropriate language from the
+    compiler being used. It will also properly quote arguments for
+    shell usage.
+  - Run explicitly Python 2 as Python plug-in interpreter to prevent
+    breakage on systems where Python 3 is the default.
+  - raw_input()'s argument in Python console is now optional, and
+    input() support has been added.
+
+File Formats:
+
+  - The PSD loader now provides an option to load "merged",
+    pre-composited version of the images that becomes available when a
+    PSD file was saved with "Maximize Compatibility" option enabled in
+    Photoshop. This is useful when loading PSD files that use features
+    that GIMP doesn't currently support, and therefore can't render
+    correctly, such as adjustment layers. When loading the merged
+    image version, we avoid loading certain additional data from the
+    file, such as channels, paths, and guides, while still loading
+    metadata. This option is currently exposed as an additional file
+    type ("Photoshop image (merged)"), which has to be explicitly
+    selected from the file-type list when opening the image.
+  - Embedding GIMP's built-in sRGB color profile to exported files is
+    now optional. The default choice can be set in the Preferences
+    dialog.
+
+Translations:
+
+  - Updated translations: Catalan, Czech, Danish, Dutch, Finnish,
+    Greek, Hungarian, Italian, Latvian, Polish, Romanian, Russian,
+    Spanish, Swedish, Ukrainian.
+
+
+Overview of Changes from GIMP 2.10.0 to GIMP 2.10.2
+===================================================
+
+Core:
+
+  - Discard fonts which fail to load and popup an info dialog to allow
+    people debug their fonts.
+  - New API to suppress updates in UI until plug-ins are done
+    introducing changes.
+  - New API to calculate histograms in separate threads, with possible further
+    extension to handle similar cases elsewhere in GIMP.
+  - Tool options are now properly saved and reloaded per-device at
+    startup.
+
+Plug-ins:
+
+  - New plug-in for importing and exporting HEIF images.
+  - Enable visibility of rasterized vector layer from PSD.
+  - Single-window screenshots in Windows fixed to correctly snap a
+    window even when it is partly off-screen or covered by another
+    window or when display scaling is not set to 100%.
+
+Filters:
+
+  - New Spherize filter to wrap an image around a spherical cap
+  - New Recursive Transform filter to create Droste effect.
+
+Usability:
+
+  - Warn users, when alpha-only painting has no effect. E.g. when target
+    drawable doesn't have an alpha channel, or the alpha channel is locked.
+  - Make the splash texts dynamic, so they are larger on larger splashes.
+  - Mention pressing Enter to complete Foreground selection in the status bar.
+  - Make sure that clicking outside any selection prevents Rectangle Select
+    and Ellipse Select tools from creating empty selections.
+  - Improve mouse wheel zooming behavior to keep the same point
+    centered under the pointer even if the image is completely visible
+    in the canvas.
+  - Add "View -> Center Image in Window" (Shift+J) as a quick way to
+    center the image at any zoom level.
+
+Translations:
+
+  - Updated translations: Catalan, Danish, Dutch, French, German, Greek,
+    Hungarian, Icelandic, Italian, Latvian, Polish, Russian, Spanish,
+    Swedish, Ukrainian.
+  - New translation of Windows installer: Chinese (Taiwan)
+
+Build:
+
+  - Add a --with-bug-report-url configure option allowing packagers to
+    set the address of their own bug tracker. This address will be the
+    one opened by the debug dialog for reporting bugs.
+  - Add a flatpak manifest for the gtk3-port branch.
+  - Remove the possibility to disable script-fu.
+  - Add a --with-icc-directory configure option to customize the color
+    profile directory. By default, it is set to the common path
+    /usr/share/color/icc.
+
+Documentation:
+
+  - Updating the description of the XCF format "devel-docs/xcf.txt", for
+    third-party readers wishing to support GIMP 2.10 XCF files.
+  - Add documentation skeletons for all enums in libgimpbase/, there is
+    much room for improvement.

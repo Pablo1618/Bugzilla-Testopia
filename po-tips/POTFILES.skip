@@ -1,0 +1,17 @@
+app
+app-tools
+build/windows/installer/lang/setup.isl.in
+data/tags
+desktop
+desktop/gimp.desktop.in
+libgimp
+libgimpbase
+libgimpcolor
+libgimpconfig
+libgimpmath
+libgimpmodule
+libgimpthumb
+libgimpwidgets
+modules
+plug-ins
+tools

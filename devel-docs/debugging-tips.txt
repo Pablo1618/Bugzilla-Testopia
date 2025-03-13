@@ -1,0 +1,102 @@
+There are a few environment variables, options or other more-or-less
+known tricks to debug GIMP. Let's try to add them here for reminder and
+newcomers.
+
+## Basics ##
+
+The basic thing is to build babl, GEGL and GIMP with `--enable-debug`.
+
+Note that if you also built glib from source with `--enable-debug`,
+every GObject destroyed are apparently overwritten with values invalid
+as pointers, so dereferencing one after destruction usually leads to a
+crash, which is a good way to find some more vicious bugs.
+
+## Debug logs ##
+
+You can see various GIMP_LOG() calls in the code. These will only be
+outputted when you set GIMP_DEBUG environment variable to a
+comma-separated list of domain.
+For instance, for `GIMP_LOG (XCF, "some string")` to be outputted,
+run GIMP like this:
+
+> GIMP_DEBUG=xcf gimp-2.10
+
+Special flags are:
+- "all" to output all domain logs;
+- "list-all" to get a list of available domains.
+
+## Debugging a warning ##
+
+If you encounter a CRITICAL or WARNING message on console, you can make
+so that GIMP crashes on it, which will make it very easy to be tracked
+down in a debugger (for instance GDB), by running GIMP with:
+
+> gimp-2.10 --g-fatal-warnings
+
+Note that if all you want is a stacktrace, it is not necessary anymore
+to use a debugger and --g-fatal-warnings. In Preferences > Debugging,
+make sure that all type of errors are debugged, and that you have either
+gdb or lldb installed. Then a graphical dialog will automatically appear
+upon encountering any WARNING or CRITICAL with backtraces and variable
+contents.
+
+Alternatively running GIMP with the CLI option --stack-trace-mode to
+values "query" or "always" will output a stacktrace too on terminal.
+But this happens only for crashes, so it still requires to use
+--g-fatal-warnings for WARNINGs and CRITICALs.
+
+Note: on Windows, even the debugging GUI happens only for crashes and
+requires that you built with Dr. Mingw dependency.
+
+## Debugging GEGL code ##
+
+You may encounter this kind of warning upon exiting GIMP:
+
+> EEEEeEeek! 2 GeglBuffers leaked
+
+To debug GeglBuffer leaks, make sure you built GEGL with -Dbuildtype=debug
+or -Dbuildtype=debugoptimized, and set the environment variable
+GEGL_DEBUG to "buffer-alloc".
+Your system also needs to have the header "execinfo.h".
+
+## Debugging babl ##
+
+Profile conversion is done with babl by default when possible, which is
+much faster.
+Setting GIMP_COLOR_TRANSFORM_DISABLE_BABL environment variable switch
+back to the old lcms implementation, which can be useful for comparison.
+
+## Debugging X Window System error ##
+
+Make X calls synchronous so that your crashes happen immediately with:
+
+> gimp-2.10 --sync
+
+You can also break on `gdk_x_error()`.
+
+## Debugging on Windows ##
+
+Even when run from a `cmd`, the standard and error outputs are not
+displayed in the terminal. For this reason, unstable builds (i.e. with
+odd minor version) pop up a debug console at start.
+
+If you are building stable versions of GIMP for debugging and want this
+debug console as well, configure with `--enable-win32-debug-console`.
+
+## Debugging icons ##
+
+See file `devel-docs/icons.txt` to learn more about our icons, and in
+particular the environment variable GIMP_ICONS_LIKE_A_BOSS.
+
+## Debugging plug-ins ##
+
+See file `devel-docs/debug-plug-ins.txt` for usage of environment
+variable GIMP_PLUGIN_DEBUG.
+
+The CLI option --stack-trace-mode also applies to plug-ins, in order to
+output a back trace on terminal.
+
+## Performance logs ##
+
+See file `devel-docs/performance-logs/performance-logs.md` for information
+about GIMP performance logs, which can help during optimization.

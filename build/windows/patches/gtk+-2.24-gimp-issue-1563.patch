@@ -1,0 +1,33 @@
+From 9c54520db9bfec214dfb0bc7a08ac320e18c9bac Mon Sep 17 00:00:00 2001
+From: Edward E <develinthedetail@gmail.com>
+Date: Thu, 28 Jun 2018 08:24:09 -0500
+Subject: [PATCH] icontheme (win32): detect SVG files by extension if
+ registered incorrectly
+
+It seems XP shipped without a registered Content Type for .svg,
+and some systems have 'text/xml' instead of 'image/svg+xml'.
+
+see https://gitlab.gnome.org/GNOME/gimp/issues/1563
+---
+ gtk/gtkicontheme.c | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/gtk/gtkicontheme.c b/gtk/gtkicontheme.c
+index 470158c..3451676 100644
+--- a/gtk/gtkicontheme.c
++++ b/gtk/gtkicontheme.c
+@@ -2927,6 +2927,11 @@ icon_info_ensure_scale_and_pixbuf (GtkIconInfo  *icon_info,
+ 
+               if (mime_type && strcmp (mime_type, "image/svg+xml") == 0)
+                 is_svg = TRUE;
++#ifdef G_OS_WIN32
++              else
++                if (strcmp (content_type, ".svg") == 0)
++                  is_svg = TRUE;
++#endif
+             }
+ 
+           g_object_unref (file_info);
+-- 
+2.9.1
+

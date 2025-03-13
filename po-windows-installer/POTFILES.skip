@@ -1,0 +1,15 @@
+app
+app-tools
+data
+desktop
+libgimp
+libgimpbase
+libgimpcolor
+libgimpconfig
+libgimpmath
+libgimpmodule
+libgimpthumb
+libgimpwidgets
+modules
+plug-ins
+tools
